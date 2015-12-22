@@ -79,4 +79,8 @@ class EverypoliticianTest < Minitest::Test
         'everypolitician/everypolitician-data/master/countries.json'
     end
   end
+
+  def test_alternative_constant_name
+    assert_equal Everypolitician, EveryPolitician
+  end
 end

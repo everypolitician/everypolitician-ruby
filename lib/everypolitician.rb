@@ -70,3 +70,6 @@ module Everypolitician
     end
   end
 end
+
+# Alternative constant name which is how it's usually capitalized in public copy.
+EveryPolitician = Everypolitician
