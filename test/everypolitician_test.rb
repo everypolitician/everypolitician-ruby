@@ -58,4 +58,17 @@ class EverypoliticianTest < Minitest::Test
       assert legislature.legislative_periods.is_a?(Array)
     end
   end
+
+  def test_raises_an_error_for_unknown_slugs
+    VCR.use_cassette('countries_json') do
+      assert_raises Everypolitician::Error do
+        Everypolitician.country('Foo')
+      end
+    end
+    VCR.use_cassette('countries_json') do
+      assert_raises Everypolitician::Error do
+        Everypolitician.legislature('Foo', 'Bar')
+      end
+    end
+  end
 end
