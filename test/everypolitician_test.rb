@@ -84,4 +84,8 @@ class EverypoliticianTest < Minitest::Test
     assert_equal 'path/to/local/countries.json', Everypolitician.countries_json
     Everypolitician.countries_json = nil
   end
+
+  def test_alternative_constant_name
+    assert_equal Everypolitician, EveryPolitician
+  end
 end
