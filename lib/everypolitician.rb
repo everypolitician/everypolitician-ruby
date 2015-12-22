@@ -5,6 +5,15 @@ require 'open-uri'
 module Everypolitician
   class Error < StandardError; end
 
+  class << self
+    attr_writer :countries_json
+  end
+
+  def self.countries_json
+    @countries_json ||= 'https://raw.githubusercontent.com/' \
+      'everypolitician/everypolitician-data/master/countries.json'
+  end
+
   def self.country(slug)
     Country.find(slug)
   end
@@ -53,20 +62,17 @@ module Everypolitician
     include Enumerable
 
     def countries
-      @countries ||= JSON.parse(countries_json, symbolize_names: true)
+      @countries ||= JSON.parse(raw_json_string, symbolize_names: true)
     end
 
     def each(&block)
       countries.each(&block)
     end
 
-    def countries_json
-      @countries_json ||= open(countries_json_url).read
-    end
+    private
 
-    def countries_json_url
-      @url ||= 'https://raw.githubusercontent.com/' \
-        'everypolitician/everypolitician-data/master/countries.json'
+    def raw_json_string
+      @json ||= open(Everypolitician.countries_json).read
     end
   end
 end

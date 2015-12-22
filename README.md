@@ -29,6 +29,12 @@ senate = australia.legislature('Senate')
 senate.popolo # data/Australia/Senate/ep-popolo-v1.0.json
 ```
 
+If you want to point at a different `countries.json`, e.g. a local path or a different url, you can set it like this:
+
+```ruby
+Everypolitician.countries_json = 'path/to/local/countries.json'
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
