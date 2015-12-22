@@ -21,9 +21,12 @@ module Everypolitician
 
   class Country
     def self.find(slug)
-      countries = JSON.parse(open('https://raw.githubusercontent.com/everypolitician/everypolitician-data/master/countries.json').read, symbolize_names: true)
-      country = countries.find { |country| country[:slug] == slug }
-      raise Error, "Unknown country slug: #{slug}" if country.nil?
+      countries_json_url = 'https://raw.githubusercontent.com/' \
+        'everypolitician/everypolitician-data/master/countries.json'
+      countries_json = open(countries_json_url).read
+      countries = JSON.parse(countries_json, symbolize_names: true)
+      country = countries.find { |c| c[:slug] == slug }
+      fail Error, "Unknown country slug: #{slug}" if country.nil?
       new(country)
     end
 
@@ -36,8 +39,8 @@ module Everypolitician
     end
 
     def legislature(slug)
-      legislature = legislatures.find { |legislature| legislature[:slug] == slug }
-      raise Error, "Unknown legislature slug: #{slug}" if legislature.nil?
+      legislature = legislatures.find { |l| l[:slug] == slug }
+      fail Error, "Unknown legislature slug: #{slug}" if legislature.nil?
       Legislature.new(legislature)
     end
   end
