@@ -71,4 +71,12 @@ class EverypoliticianTest < Minitest::Test
       end
     end
   end
+
+  def test_retrieving_countries_json
+    VCR.use_cassette('countries_json') do
+      countries_json = Everypolitician::CountriesJson.new
+      assert_equal countries_json.countries_json_url, 'https://raw.githubusercontent.com/' \
+        'everypolitician/everypolitician-data/master/countries.json'
+    end
+  end
 end
