@@ -19,7 +19,17 @@ module Everypolitician
     [country, legislature]
   end
 
-  class Country
+  class Entity
+    def initialize(data)
+      data.each do |key, value|
+        define_singleton_method(key) do
+          value
+        end
+      end
+    end
+  end
+
+  class Country < Entity
     def self.find(slug)
       countries_json_url = 'https://raw.githubusercontent.com/' \
         'everypolitician/everypolitician-data/master/countries.json'
@@ -30,14 +40,6 @@ module Everypolitician
       new(country)
     end
 
-    def initialize(country_data)
-      country_data.each do |key, value|
-        define_singleton_method(key) do
-          value
-        end
-      end
-    end
-
     def legislature(slug)
       legislature = legislatures.find { |l| l[:slug] == slug }
       fail Error, "Unknown legislature slug: #{slug}" if legislature.nil?
@@ -45,17 +47,9 @@ module Everypolitician
     end
   end
 
-  class Legislature
+  class Legislature < Entity
     def self.find(country_slug, legislature_slug)
       Country.find(country_slug).legislature(legislature_slug)
-    end
-
-    def initialize(legislature_data)
-      legislature_data.each do |key, value|
-        define_singleton_method(key) do
-          value
-        end
-      end
     end
   end
 end
