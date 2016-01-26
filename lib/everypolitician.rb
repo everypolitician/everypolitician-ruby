@@ -96,7 +96,7 @@ module Everypolitician
 
     def popolo_url
       @popolo_url ||= 'https://raw.githubusercontent.com/everypolitician' \
-        "/everypolitician-data/master/#{raw_data[:popolo]}"
+        "/everypolitician-data/#{sha}/#{raw_data[:popolo]}"
     end
 
     def legislative_periods
