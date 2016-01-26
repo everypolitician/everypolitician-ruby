@@ -49,9 +49,10 @@ module Everypolitician
   end
 
   class Country < Entity
-    def self.find(slug)
-      country = CountriesJson.new.find { |c| c[:slug] == slug }
-      fail Error, "Unknown country slug: #{slug}" if country.nil?
+    def self.find(query)
+      query = { slug: query } if query.is_a?(String)
+      country = CountriesJson.new.find { |c| query.all? { |k, v| c[k] == v } }
+      fail Error, "Couldn't find country for query: #{query}" if country.nil?
       new(country)
     end
 
