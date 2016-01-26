@@ -24,9 +24,9 @@ Or install it yourself as:
 require 'everypolitician'
 
 australia = Everypolitician.country('Australia')
-australia.code # AU
+australia.code # => "AU"
 senate = australia.legislature('Senate')
-senate.popolo # data/Australia/Senate/ep-popolo-v1.0.json
+senate.popolo # => #<Everypolitician::Popolo::JSON>
 ```
 
 If you want to point at a different `countries.json`, e.g. a local path or a different url, you can set it like this:
