@@ -29,6 +29,10 @@ module Everypolitician
     [country, legislature]
   end
 
+  def self.countries
+    CountriesJson.new.countries.map { |c| Country.new(c) }
+  end
+
   class Entity
     def initialize(data)
       process_data(data).each do |key, value|

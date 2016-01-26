@@ -95,4 +95,13 @@ class EverypoliticianTest < Minitest::Test
       assert_instance_of Everypolitician::Popolo::JSON, australia_senate.popolo
     end
   end
+
+  def test_getting_all_countries
+    VCR.use_cassette('countries_json') do
+      all_countries = Everypolitician.countries
+      assert_equal 232, all_countries.size
+      country = all_countries.first
+      assert_instance_of Everypolitician::Country, country
+    end
+  end
 end
