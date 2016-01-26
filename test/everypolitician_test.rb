@@ -99,7 +99,7 @@ class EverypoliticianTest < Minitest::Test
     end
   end
 
-  def test_finding_by_other_attributes
+  def test_finding_country_by_attributes
     VCR.use_cassette('countries_json') do
       country = Everypolitician.country(code: 'AU')
       assert_equal 'Australia', country.name
