@@ -105,4 +105,12 @@ class EverypoliticianTest < Minitest::Test
       assert_equal 'Australia', country.name
     end
   end
+
+  def test_finding_legislature_by_attributes
+    VCR.use_cassette('countries_json') do
+      country = Everypolitician.country(code: 'AU')
+      senate = country.legislature(slug: 'Senate')
+      assert_equal 'Senate', senate.name
+    end
+  end
 end

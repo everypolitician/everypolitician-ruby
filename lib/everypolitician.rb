@@ -57,8 +57,9 @@ module Everypolitician
       @legislatures ||= @raw_data[:legislatures].map { |l| Legislature.new(l) }
     end
 
-    def legislature(slug)
-      legislature = legislatures.find { |l| l.slug == slug }
+    def legislature(query)
+      query = { slug: query } if query.is_a?(String)
+      legislature = legislatures.find { |l| query.all? { |k, v| l.__send__(k) == v } }
       fail Error, "Unknown legislature slug: #{slug}" if legislature.nil?
       legislature
     end
