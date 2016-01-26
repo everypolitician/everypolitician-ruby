@@ -33,21 +33,6 @@ module Everypolitician
     CountriesJson.new.countries.map { |c| Country.new(c) }
   end
 
-  class Entity
-    def initialize(data)
-      process_data(data).each do |key, value|
-        define_singleton_method(key) do
-          value
-        end
-      end
-    end
-
-    # Override in subclasses to change structure of data
-    def process_data(data)
-      data
-    end
-  end
-
   class Country
     attr_reader :name
     attr_reader :code
@@ -79,19 +64,38 @@ module Everypolitician
     end
   end
 
-  class Legislature < Entity
+  class Legislature
+    attr_reader :name
+    attr_reader :slug
+    attr_reader :lastmod
+    attr_reader :person_count
+    attr_reader :sha
+    attr_reader :raw_data
+
     def self.find(country_slug, legislature_slug)
       Country.find(country_slug).legislature(legislature_slug)
+    end
+
+    def initialize(legislature_data)
+      @name = legislature_data[:name]
+      @slug = legislature_data[:slug]
+      @lastmod = legislature_data[:lastmod]
+      @person_count = legislature_data[:person_count]
+      @sha = legislature_data[:sha]
+      @raw_data = legislature_data
     end
 
     def popolo
       @popolo ||= Everypolitician::Popolo.parse(open(popolo_url).read)
     end
 
-    def process_data(data)
-      data[:popolo_url] = 'https://raw.githubusercontent.com/everypolitician' \
-        "/everypolitician-data/master/#{data.delete(:popolo)}"
-      data
+    def popolo_url
+      @popolo_url ||= 'https://raw.githubusercontent.com/everypolitician' \
+        "/everypolitician-data/master/#{raw_data[:popolo]}"
+    end
+
+    def legislative_periods
+      @legislative_periods ||= raw_data[:legislative_periods]
     end
   end
 
