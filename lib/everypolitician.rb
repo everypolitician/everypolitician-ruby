@@ -53,6 +53,10 @@ module Everypolitician
       @raw_data = country_data
     end
 
+    def [](key)
+      raw_data[key]
+    end
+
     def legislatures
       @legislatures ||= @raw_data[:legislatures].map { |l| Legislature.new(l) }
     end

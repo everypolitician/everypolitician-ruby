@@ -113,4 +113,11 @@ class EverypoliticianTest < Minitest::Test
       assert_equal 'Senate', senate.name
     end
   end
+
+  def test_accessing_properties_with_square_brackets
+    VCR.use_cassette('countries_json') do
+      country = Everypolitician.country(code: 'AU')
+      assert_equal 'Australia', country[:name]
+    end
+  end
 end
