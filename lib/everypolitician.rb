@@ -8,11 +8,20 @@ module Everypolitician
 
   class << self
     attr_writer :countries_json
+    attr_writer :countries
   end
 
   def self.countries_json
     @countries_json ||= 'https://raw.githubusercontent.com/' \
       'everypolitician/everypolitician-data/master/countries.json'
+  end
+
+  def self.countries
+    @countries ||= begin
+      JSON.parse(open(countries_json).read, symbolize_names: true).map do |c|
+        Country.new(c)
+      end
+    end
   end
 
   def self.country(slug)
@@ -29,10 +38,6 @@ module Everypolitician
     [country, legislature]
   end
 
-  def self.countries
-    CountriesJson.new.countries.map { |c| Country.new(c) }
-  end
-
   class Country
     attr_reader :name
     attr_reader :code
@@ -41,7 +46,7 @@ module Everypolitician
 
     def self.find(query)
       query = { slug: query } if query.is_a?(String)
-      country = CountriesJson.new.find { |c| query.all? { |k, v| c[k] == v } }
+      country = Everypolitician.countries.find { |c| query.all? { |k, v| c[k] == v } }
       fail Error, "Couldn't find country for query: #{query}" if country.nil?
       new(country)
     end
@@ -101,24 +106,6 @@ module Everypolitician
 
     def legislative_periods
       @legislative_periods ||= raw_data[:legislative_periods]
-    end
-  end
-
-  class CountriesJson
-    include Enumerable
-
-    def countries
-      @countries ||= JSON.parse(raw_json_string, symbolize_names: true)
-    end
-
-    def each(&block)
-      countries.each(&block)
-    end
-
-    private
-
-    def raw_json_string
-      @json ||= open(Everypolitician.countries_json).read
     end
   end
 end
