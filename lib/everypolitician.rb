@@ -1,6 +1,7 @@
 require 'everypolitician/version'
 require 'json'
 require 'open-uri'
+require 'everypolitician/popolo'
 
 module Everypolitician
   class Error < StandardError; end
@@ -30,11 +31,16 @@ module Everypolitician
 
   class Entity
     def initialize(data)
-      data.each do |key, value|
+      process_data(data).each do |key, value|
         define_singleton_method(key) do
           value
         end
       end
+    end
+
+    # Override in subclasses to change structure of data
+    def process_data(data)
+      data
     end
   end
 
@@ -55,6 +61,16 @@ module Everypolitician
   class Legislature < Entity
     def self.find(country_slug, legislature_slug)
       Country.find(country_slug).legislature(legislature_slug)
+    end
+
+    def popolo
+      @popolo ||= Everypolitician::Popolo.parse(open(popolo_url).read)
+    end
+
+    def process_data(data)
+      data[:popolo_url] = 'https://raw.githubusercontent.com/everypolitician' \
+        "/everypolitician-data/master/#{data.delete(:popolo)}"
+      data
     end
   end
 
