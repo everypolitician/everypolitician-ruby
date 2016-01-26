@@ -48,7 +48,12 @@ module Everypolitician
     end
   end
 
-  class Country < Entity
+  class Country
+    attr_reader :name
+    attr_reader :code
+    attr_reader :slug
+    attr_reader :raw_data
+
     def self.find(query)
       query = { slug: query } if query.is_a?(String)
       country = CountriesJson.new.find { |c| query.all? { |k, v| c[k] == v } }
@@ -56,10 +61,21 @@ module Everypolitician
       new(country)
     end
 
+    def initialize(country_data)
+      @name = country_data[:name]
+      @code = country_data[:code]
+      @slug = country_data[:slug]
+      @raw_data = country_data
+    end
+
+    def legislatures
+      @legislatures ||= @raw_data[:legislatures].map { |l| Legislature.new(l) }
+    end
+
     def legislature(slug)
-      legislature = legislatures.find { |l| l[:slug] == slug }
+      legislature = legislatures.find { |l| l.slug == slug }
       fail Error, "Unknown legislature slug: #{slug}" if legislature.nil?
-      Legislature.new(legislature)
+      legislature
     end
   end
 
@@ -99,4 +115,4 @@ module Everypolitician
 end
 
 # Alternative constant name which is how it's usually capitalized in public copy.
-EveryPolitician = Everypolitician
+EveryPolitician ||= Everypolitician
