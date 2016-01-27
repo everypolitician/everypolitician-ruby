@@ -18,9 +18,7 @@ class EverypoliticianTest < Minitest::Test
     VCR.use_cassette('countries_json') do
       legislature = Everypolitician::Legislature.find('Australia', 'Senate')
       assert_equal 'Senate', legislature.name
-      assert_equal 'data/Australia/Senate/sources', legislature.sources_directory
-      assert_equal 'https://raw.githubusercontent.com/everypolitician/everypolitician-data/master/data/Australia/Senate/ep-popolo-v1.0.json', legislature.popolo_url
-      assert_equal 'data/Australia/Senate/names.csv', legislature.names
+      assert_equal 'https://raw.githubusercontent.com/everypolitician/everypolitician-data/9179af3/data/Australia/Senate/ep-popolo-v1.0.json', legislature.popolo_url
       assert legislature.legislative_periods.is_a?(Array)
     end
   end
@@ -38,9 +36,7 @@ class EverypoliticianTest < Minitest::Test
     VCR.use_cassette('countries_json') do
       legislature = Everypolitician.legislature('Australia', 'Senate')
       assert_equal 'Senate', legislature.name
-      assert_equal 'data/Australia/Senate/sources', legislature.sources_directory
-      assert_equal 'https://raw.githubusercontent.com/everypolitician/everypolitician-data/master/data/Australia/Senate/ep-popolo-v1.0.json', legislature.popolo_url
-      assert_equal 'data/Australia/Senate/names.csv', legislature.names
+      assert_equal 'https://raw.githubusercontent.com/everypolitician/everypolitician-data/9179af3/data/Australia/Senate/ep-popolo-v1.0.json', legislature.popolo_url
       assert legislature.legislative_periods.is_a?(Array)
     end
   end
@@ -52,9 +48,7 @@ class EverypoliticianTest < Minitest::Test
       assert_equal 'AU', country.code
       assert_equal 2, country.legislatures.size
       assert_equal 'Senate', legislature.name
-      assert_equal 'data/Australia/Senate/sources', legislature.sources_directory
-      assert_equal 'https://raw.githubusercontent.com/everypolitician/everypolitician-data/master/data/Australia/Senate/ep-popolo-v1.0.json', legislature.popolo_url
-      assert_equal 'data/Australia/Senate/names.csv', legislature.names
+      assert_equal 'https://raw.githubusercontent.com/everypolitician/everypolitician-data/9179af3/data/Australia/Senate/ep-popolo-v1.0.json', legislature.popolo_url
       assert legislature.legislative_periods.is_a?(Array)
     end
   end
@@ -93,6 +87,37 @@ class EverypoliticianTest < Minitest::Test
     VCR.use_cassette('popolo') do
       australia_senate = Everypolitician.legislature('Australia', 'Senate')
       assert_instance_of Everypolitician::Popolo::JSON, australia_senate.popolo
+    end
+  end
+
+  def test_getting_all_countries
+    VCR.use_cassette('countries_json') do
+      all_countries = Everypolitician.countries
+      assert_equal 232, all_countries.size
+      country = all_countries.first
+      assert_instance_of Everypolitician::Country, country
+    end
+  end
+
+  def test_finding_country_by_attributes
+    VCR.use_cassette('countries_json') do
+      country = Everypolitician.country(code: 'AU')
+      assert_equal 'Australia', country.name
+    end
+  end
+
+  def test_finding_legislature_by_attributes
+    VCR.use_cassette('countries_json') do
+      country = Everypolitician.country(code: 'AU')
+      senate = country.legislature(slug: 'Senate')
+      assert_equal 'Senate', senate.name
+    end
+  end
+
+  def test_accessing_properties_with_square_brackets
+    VCR.use_cassette('countries_json') do
+      country = Everypolitician.country(code: 'AU')
+      assert_equal 'Australia', country[:name]
     end
   end
 end

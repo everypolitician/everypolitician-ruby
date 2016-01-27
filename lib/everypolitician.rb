@@ -8,11 +8,20 @@ module Everypolitician
 
   class << self
     attr_writer :countries_json
+    attr_writer :countries
   end
 
   def self.countries_json
     @countries_json ||= 'https://raw.githubusercontent.com/' \
       'everypolitician/everypolitician-data/master/countries.json'
+  end
+
+  def self.countries
+    @countries ||= begin
+      JSON.parse(open(countries_json).read, symbolize_names: true).map do |c|
+        Country.new(c)
+      end
+    end
   end
 
   def self.country(slug)
@@ -29,69 +38,77 @@ module Everypolitician
     [country, legislature]
   end
 
-  class Entity
-    def initialize(data)
-      process_data(data).each do |key, value|
-        define_singleton_method(key) do
-          value
-        end
-      end
-    end
+  class Country
+    attr_reader :name
+    attr_reader :code
+    attr_reader :slug
+    attr_reader :raw_data
 
-    # Override in subclasses to change structure of data
-    def process_data(data)
-      data
-    end
-  end
-
-  class Country < Entity
-    def self.find(slug)
-      country = CountriesJson.new.find { |c| c[:slug] == slug }
-      fail Error, "Unknown country slug: #{slug}" if country.nil?
+    def self.find(query)
+      query = { slug: query } if query.is_a?(String)
+      country = Everypolitician.countries.find { |c| query.all? { |k, v| c[k] == v } }
+      fail Error, "Couldn't find country for query: #{query}" if country.nil?
       new(country)
     end
 
-    def legislature(slug)
-      legislature = legislatures.find { |l| l[:slug] == slug }
+    def initialize(country_data)
+      @name = country_data[:name]
+      @code = country_data[:code]
+      @slug = country_data[:slug]
+      @raw_data = country_data
+    end
+
+    def [](key)
+      raw_data[key]
+    end
+
+    def legislatures
+      @legislatures ||= @raw_data[:legislatures].map { |l| Legislature.new(l) }
+    end
+
+    def legislature(query)
+      query = { slug: query } if query.is_a?(String)
+      legislature = legislatures.find { |l| query.all? { |k, v| l.__send__(k) == v } }
       fail Error, "Unknown legislature slug: #{slug}" if legislature.nil?
-      Legislature.new(legislature)
+      legislature
     end
   end
 
-  class Legislature < Entity
+  class Legislature
+    attr_reader :name
+    attr_reader :slug
+    attr_reader :lastmod
+    attr_reader :person_count
+    attr_reader :sha
+    attr_reader :raw_data
+
     def self.find(country_slug, legislature_slug)
       Country.find(country_slug).legislature(legislature_slug)
+    end
+
+    def initialize(legislature_data)
+      @name = legislature_data[:name]
+      @slug = legislature_data[:slug]
+      @lastmod = legislature_data[:lastmod]
+      @person_count = legislature_data[:person_count]
+      @sha = legislature_data[:sha]
+      @raw_data = legislature_data
     end
 
     def popolo
       @popolo ||= Everypolitician::Popolo.parse(open(popolo_url).read)
     end
 
-    def process_data(data)
-      data[:popolo_url] = 'https://raw.githubusercontent.com/everypolitician' \
-        "/everypolitician-data/master/#{data.delete(:popolo)}"
-      data
-    end
-  end
-
-  class CountriesJson
-    include Enumerable
-
-    def countries
-      @countries ||= JSON.parse(raw_json_string, symbolize_names: true)
+    def popolo_url
+      @popolo_url ||= 'https://raw.githubusercontent.com/everypolitician' \
+        "/everypolitician-data/#{sha}/#{raw_data[:popolo]}"
     end
 
-    def each(&block)
-      countries.each(&block)
-    end
-
-    private
-
-    def raw_json_string
-      @json ||= open(Everypolitician.countries_json).read
+    def legislative_periods
+      @legislative_periods ||= raw_data[:legislative_periods]
     end
   end
 end
 
 # Alternative constant name which is how it's usually capitalized in public copy.
-EveryPolitician = Everypolitician
+EveryPolitician ||= Everypolitician
