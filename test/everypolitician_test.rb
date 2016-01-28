@@ -5,6 +5,11 @@ class EverypoliticianTest < Minitest::Test
     refute_nil ::Everypolitician::VERSION
   end
 
+  # Clear the countries.json cache before each run
+  def setup
+    Everypolitician.countries = nil
+  end
+
   def test_country_find
     VCR.use_cassette('countries_json') do
       country = Everypolitician::Country.find('Australia')
