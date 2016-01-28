@@ -120,4 +120,16 @@ class EverypoliticianTest < Minitest::Test
       assert_equal 'Australia', country[:name]
     end
   end
+
+  def test_legislative_periods
+    au_senate = Everypolitician.country(slug: 'Australia').legislature(slug: 'Senate')
+    lp = au_senate.legislative_periods.first
+    assert_equal 'term/44', lp.id
+    assert_equal '44th Parliament', lp.name
+    assert_equal Date.new(2013, 9, 7), lp.start_date
+    assert_equal '44', lp.slug
+    assert_equal 'https://raw.githubusercontent.com/everypolitician/everypolitician-data/9179af3/data/Australia/Senate/term-44.csv', lp.csv_url
+    assert_equal 'Senate', lp.legislature.name
+    assert_equal 'Australia', lp.country.name
+  end
 end
