@@ -2,6 +2,7 @@ require 'everypolitician/version'
 require 'json'
 require 'open-uri'
 require 'everypolitician/popolo'
+require 'csv'
 
 module Everypolitician
   class Error < StandardError; end
@@ -137,6 +138,10 @@ module Everypolitician
     def csv_url
       @csv_url ||= 'https://raw.githubusercontent.com/everypolitician' \
         "/everypolitician-data/#{legislature.sha}/#{raw_data[:csv]}"
+    end
+
+    def csv
+      CSV.parse(open(csv_url).read, headers: true, header_converters: :symbol, converters: nil)
     end
   end
 end
