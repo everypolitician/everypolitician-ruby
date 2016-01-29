@@ -2,6 +2,7 @@ require 'everypolitician/version'
 require 'json'
 require 'open-uri'
 require 'everypolitician/popolo'
+require 'csv'
 
 module Everypolitician
   class Error < StandardError; end
@@ -63,13 +64,13 @@ module Everypolitician
     end
 
     def legislatures
-      @legislatures ||= @raw_data[:legislatures].map { |l| Legislature.new(l) }
+      @legislatures ||= @raw_data[:legislatures].map { |l| Legislature.new(l, self) }
     end
 
     def legislature(query)
       query = { slug: query } if query.is_a?(String)
       legislature = legislatures.find { |l| query.all? { |k, v| l.__send__(k) == v } }
-      fail Error, "Unknown legislature slug: #{slug}" if legislature.nil?
+      fail Error, "Unknown legislature: #{query}" if legislature.nil?
       legislature
     end
   end
@@ -80,19 +81,21 @@ module Everypolitician
     attr_reader :lastmod
     attr_reader :person_count
     attr_reader :sha
+    attr_reader :country
     attr_reader :raw_data
 
     def self.find(country_slug, legislature_slug)
       Country.find(country_slug).legislature(legislature_slug)
     end
 
-    def initialize(legislature_data)
+    def initialize(legislature_data, country)
       @name = legislature_data[:name]
       @slug = legislature_data[:slug]
       @lastmod = legislature_data[:lastmod]
       @person_count = legislature_data[:person_count]
       @sha = legislature_data[:sha]
       @raw_data = legislature_data
+      @country = country
     end
 
     def popolo
@@ -105,7 +108,48 @@ module Everypolitician
     end
 
     def legislative_periods
-      @legislative_periods ||= raw_data[:legislative_periods]
+      @legislative_periods ||= raw_data[:legislative_periods].map do |lp|
+        LegislativePeriod.new(lp, self, self.country)
+      end
+    end
+  end
+
+  class LegislativePeriod
+    attr_reader :id
+    attr_reader :name
+    attr_reader :slug
+    attr_reader :legislature
+    attr_reader :country
+    attr_reader :raw_data
+
+    def initialize(legislative_period_data, legislature, country)
+      @id = legislative_period_data[:id]
+      @name = legislative_period_data[:name]
+      @slug = legislative_period_data[:slug]
+      @legislature = legislature
+      @country = country
+      @raw_data = legislative_period_data
+    end
+
+    def start_date
+      @start_date ||= Date.parse(raw_data[:start_date])
+    end
+
+    def end_date
+      @end_date ||= Date.parse(raw_data[:end_date])
+    end
+
+    def csv_url
+      @csv_url ||= 'https://raw.githubusercontent.com/everypolitician' \
+        "/everypolitician-data/#{legislature.sha}/#{raw_data[:csv]}"
+    end
+
+    def csv
+      CSV.parse(open(csv_url).read, headers: true, header_converters: :symbol, converters: nil)
+    end
+
+    def [](key)
+      raw_data[key]
     end
   end
 end
