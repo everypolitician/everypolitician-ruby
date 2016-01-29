@@ -159,4 +159,11 @@ class EverypoliticianTest < Minitest::Test
       assert_equal 'data/Australia/Senate/term-44.csv', lp[:csv]
     end
   end
+
+  def test_legislative_period_end_date
+    VCR.use_cassette('countries_json') do
+      lp = Everypolitician.country(slug: 'Australia').legislature(slug: 'Representatives').legislative_periods[1]
+      assert_equal Date.new(2013, 9, 7), lp.end_date
+    end
+  end
 end

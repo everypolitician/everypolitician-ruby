@@ -70,7 +70,7 @@ module Everypolitician
     def legislature(query)
       query = { slug: query } if query.is_a?(String)
       legislature = legislatures.find { |l| query.all? { |k, v| l.__send__(k) == v } }
-      fail Error, "Unknown legislature slug: #{slug}" if legislature.nil?
+      fail Error, "Unknown legislature: #{query}" if legislature.nil?
       legislature
     end
   end
@@ -133,6 +133,10 @@ module Everypolitician
 
     def start_date
       @start_date ||= Date.parse(raw_data[:start_date])
+    end
+
+    def end_date
+      @end_date ||= Date.parse(raw_data[:end_date])
     end
 
     def csv_url
