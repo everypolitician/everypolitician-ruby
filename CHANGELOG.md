@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.6.0] - 2016-01-29
+
+### Added
+
+- There is now a `LegislativePeriod` class to represent each legislative period in a legislature. This has a `#csv` method to return a parsed version of the legislative periods CSV.
+- You can now call `Legislature#country` to get the country for a legislature. Similarly you can call `LegislativePeriod#country` or `LegislativePeriod#legislature` to get the related objects.
+
 ## [0.5.0] - 2016-01-27
 
 ### Added
@@ -47,3 +54,4 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 [0.3.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.2.0...v0.3.0
 [0.4.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.3.0...v0.4.0
 [0.5.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.4.0...v0.5.0
+[0.6.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.5.0...v0.6.0
