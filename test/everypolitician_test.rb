@@ -148,4 +148,15 @@ class EverypoliticianTest < Minitest::Test
       assert_instance_of CSV::Table, csv
     end
   end
+
+  def test_legislative_period_square_brackets_expose_raw_data
+    VCR.use_cassette('countries_json') do
+      au_senate = Everypolitician.country(slug: 'Australia').legislature(slug: 'Senate')
+      lp = au_senate.legislative_periods.first
+      assert_equal 'term/44', lp[:id]
+      assert_equal '44th Parliament', lp[:name]
+      assert_equal '2013-09-07', lp[:start_date]
+      assert_equal 'data/Australia/Senate/term-44.csv', lp[:csv]
+    end
+  end
 end

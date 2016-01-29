@@ -143,6 +143,10 @@ module Everypolitician
     def csv
       CSV.parse(open(csv_url).read, headers: true, header_converters: :symbol, converters: nil)
     end
+
+    def [](key)
+      raw_data[key]
+    end
   end
 end
 
