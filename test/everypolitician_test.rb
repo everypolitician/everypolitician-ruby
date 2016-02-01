@@ -166,4 +166,13 @@ class EverypoliticianTest < Minitest::Test
       assert_equal Date.new(2013, 9, 7), lp.end_date
     end
   end
+
+  def test_legislative_period_unique_people
+    VCR.use_cassette('estonia-riigikogu-csv') do
+      legislature = Everypolitician.country(slug: 'Estonia').legislature(slug: 'Riigikogu')
+      lp = legislature.legislative_periods.first
+      assert_equal 131, lp.csv.size
+      assert_equal 127, lp.unique_people.size
+    end
+  end
 end
