@@ -145,11 +145,15 @@ module Everypolitician
     end
 
     def csv
-      CSV.parse(open(csv_url).read, headers: true, header_converters: :symbol, converters: nil)
+      @csv ||= CSV.parse(open(csv_url).read, headers: true, header_converters: :symbol, converters: nil)
     end
 
     def [](key)
       raw_data[key]
+    end
+
+    def unique_people
+      csv.map(&:to_hash).uniq { |person| person[:id] }
     end
   end
 end
