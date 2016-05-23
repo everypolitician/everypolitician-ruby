@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.6.1] - 2016-05-23
+
+## Fixed
+
+- `start_date` and `end_date` for a legislative period now work correctly for a partial date, e.g. `2010`.
+
 ## [0.6.0] - 2016-01-29
 
 ### Added
@@ -55,3 +61,4 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 [0.4.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.3.0...v0.4.0
 [0.5.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.4.0...v0.5.0
 [0.6.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.5.0...v0.6.0
+[0.6.1]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.6.0...v0.6.1
