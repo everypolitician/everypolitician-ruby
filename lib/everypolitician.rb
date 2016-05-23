@@ -132,11 +132,11 @@ module Everypolitician
     end
 
     def start_date
-      @start_date ||= Date.parse(raw_data[:start_date])
+      @start_date ||= parse_partial_date(raw_data[:start_date])
     end
 
     def end_date
-      @end_date ||= Date.parse(raw_data[:end_date])
+      @end_date ||= parse_partial_date(raw_data[:end_date])
     end
 
     def csv_url
@@ -150,6 +150,12 @@ module Everypolitician
 
     def [](key)
       raw_data[key]
+    end
+
+    private
+
+    def parse_partial_date(date)
+      Date.new(*date.split('-').map(&:to_i))
     end
   end
 end

@@ -166,4 +166,13 @@ class EverypoliticianTest < Minitest::Test
       assert_equal Date.new(2013, 9, 7), lp.end_date
     end
   end
+
+  def test_partial_dates
+    VCR.use_cassette('countries_json') do
+      af = Everypolitician.country(slug: 'Albania').legislature(slug: 'Assembly')
+      lp = af.legislative_periods.last
+      assert_equal Date.new(2009), lp.start_date
+      assert_equal Date.new(2013), lp.end_date
+    end
+  end
 end
