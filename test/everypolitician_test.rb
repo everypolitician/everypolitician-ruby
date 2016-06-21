@@ -54,6 +54,7 @@ class EverypoliticianTest < Minitest::Test
       assert_equal 2, country.legislatures.size
       assert_equal 'Senate', legislature.name
       assert_equal 'https://raw.githubusercontent.com/everypolitician/everypolitician-data/9179af3/data/Australia/Senate/ep-popolo-v1.0.json', legislature.popolo_url
+      assert_equal 'Australia/Senate', legislature.directory
       assert legislature.legislative_periods.is_a?(Array)
     end
   end

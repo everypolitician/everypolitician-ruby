@@ -112,6 +112,10 @@ module Everypolitician
         LegislativePeriod.new(lp, self, self.country)
       end
     end
+
+    def directory
+      @directory = raw_data[:sources_directory].split('/')[1,2].join('/')
+    end
   end
 
   class LegislativePeriod
