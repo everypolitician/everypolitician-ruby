@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.7.0] - 2016-06-21
+
+### Added
+
+- There is now a `Legislature.directory` method for returning the
+  directory path under `data` where the raw data on everypolician data
+  can be found
+
 ## [0.6.1] - 2016-05-23
 
 ## Fixed
