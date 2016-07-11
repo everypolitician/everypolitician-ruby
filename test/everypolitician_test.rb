@@ -59,6 +59,15 @@ class EverypoliticianTest < Minitest::Test
     end
   end
 
+  def test_sources_dir_convenience_method
+    VCR.use_cassette('countries_json') do
+      legislature = Everypolitician::Legislature.from_sources_dir('Australia/Senate')
+      assert_equal 'Australia', legislature.country.name
+      assert_equal 'AU', legislature.country.code
+      assert_equal 'Senate', legislature.name
+    end
+  end
+
   def test_raises_an_error_for_unknown_slugs
     VCR.use_cassette('countries_json') do
       assert_raises Everypolitician::Error do

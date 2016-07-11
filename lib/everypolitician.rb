@@ -116,6 +116,11 @@ module Everypolitician
     def directory
       @directory = raw_data[:sources_directory].split('/')[1,2].join('/')
     end
+
+    def self.from_sources_dir(dir)
+      @index_by_sources ||= EveryPolitician.countries.map(&:legislatures).flatten.group_by(&:directory)
+      @index_by_sources[dir][0]
+    end
   end
 
   class LegislativePeriod
