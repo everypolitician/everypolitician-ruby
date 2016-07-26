@@ -1,13 +1,15 @@
 require 'test_helper'
 
 class EverypoliticianTest < Minitest::Test
-  def test_that_it_has_a_version_number
-    refute_nil ::Everypolitician::VERSION
-  end
 
   # Clear the countries.json cache before each run
   def setup
     Everypolitician.countries = nil
+    @current_sha = 'ea04acd'
+  end
+
+  def test_that_it_has_a_version_number
+    refute_nil ::Everypolitician::VERSION
   end
 
   def test_country_find
@@ -23,7 +25,7 @@ class EverypoliticianTest < Minitest::Test
     VCR.use_cassette('countries_json') do
       legislature = Everypolitician::Legislature.find('Australia', 'Senate')
       assert_equal 'Senate', legislature.name
-      assert_equal 'https://raw.githubusercontent.com/everypolitician/everypolitician-data/9179af3/data/Australia/Senate/ep-popolo-v1.0.json', legislature.popolo_url
+      assert_equal "https://raw.githubusercontent.com/everypolitician/everypolitician-data/#{@current_sha}/data/Australia/Senate/ep-popolo-v1.0.json", legislature.popolo_url
       assert legislature.legislative_periods.is_a?(Array)
     end
   end
@@ -41,7 +43,7 @@ class EverypoliticianTest < Minitest::Test
     VCR.use_cassette('countries_json') do
       legislature = Everypolitician.legislature('Australia', 'Senate')
       assert_equal 'Senate', legislature.name
-      assert_equal 'https://raw.githubusercontent.com/everypolitician/everypolitician-data/9179af3/data/Australia/Senate/ep-popolo-v1.0.json', legislature.popolo_url
+      assert_equal "https://raw.githubusercontent.com/everypolitician/everypolitician-data/#{@current_sha}/data/Australia/Senate/ep-popolo-v1.0.json", legislature.popolo_url
       assert legislature.legislative_periods.is_a?(Array)
     end
   end
@@ -53,7 +55,7 @@ class EverypoliticianTest < Minitest::Test
       assert_equal 'AU', country.code
       assert_equal 2, country.legislatures.size
       assert_equal 'Senate', legislature.name
-      assert_equal 'https://raw.githubusercontent.com/everypolitician/everypolitician-data/9179af3/data/Australia/Senate/ep-popolo-v1.0.json', legislature.popolo_url
+      assert_equal "https://raw.githubusercontent.com/everypolitician/everypolitician-data/#{@current_sha}/data/Australia/Senate/ep-popolo-v1.0.json", legislature.popolo_url
       assert_equal 'Australia/Senate', legislature.directory
       assert legislature.legislative_periods.is_a?(Array)
     end
@@ -108,7 +110,7 @@ class EverypoliticianTest < Minitest::Test
   def test_getting_all_countries
     VCR.use_cassette('countries_json') do
       all_countries = Everypolitician.countries
-      assert_equal 232, all_countries.size
+      assert_equal 233, all_countries.size
       country = all_countries.first
       assert_instance_of Everypolitician::Country, country
     end
@@ -144,7 +146,7 @@ class EverypoliticianTest < Minitest::Test
       assert_equal '44th Parliament', lp.name
       assert_equal Date.new(2013, 9, 7), lp.start_date
       assert_equal '44', lp.slug
-      assert_equal 'https://raw.githubusercontent.com/everypolitician/everypolitician-data/9179af3/data/Australia/Senate/term-44.csv', lp.csv_url
+      assert_equal "https://raw.githubusercontent.com/everypolitician/everypolitician-data/#{@current_sha}/data/Australia/Senate/term-44.csv", lp.csv_url
       assert_equal 'Senate', lp.legislature.name
       assert_equal 'Australia', lp.country.name
     end
@@ -185,4 +187,12 @@ class EverypoliticianTest < Minitest::Test
       assert_equal Date.new(2013), lp.end_date
     end
   end
+
+  def test_expose_the_statement_count_of_a_legislature
+    VCR.use_cassette('countries_json') do
+      uganda_parliament = Everypolitician.country(slug: 'Uganda').legislature(slug: 'Parliament')
+      assert_equal 18031, uganda_parliament.statement_count
+    end
+  end
+
 end
