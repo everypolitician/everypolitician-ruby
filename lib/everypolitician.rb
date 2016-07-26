@@ -83,6 +83,7 @@ module Everypolitician
     attr_reader :sha
     attr_reader :country
     attr_reader :raw_data
+    attr_reader :statement_count
 
     def self.find(country_slug, legislature_slug)
       Country.find(country_slug).legislature(legislature_slug)
@@ -94,6 +95,7 @@ module Everypolitician
       @lastmod = legislature_data[:lastmod]
       @person_count = legislature_data[:person_count]
       @sha = legislature_data[:sha]
+      @statement_count = legislature_data[:statement_count]
       @raw_data = legislature_data
       @country = country
     end
