@@ -20,6 +20,8 @@ Or install it yourself as:
 
 ## Usage
 
+Use as shown below, passing the `:slug` of the country to the `country` method, and the `:slug` of the legislature to the `legislature` method. Examples:
+
 ```ruby
 require 'everypolitician'
 
@@ -27,6 +29,18 @@ australia = Everypolitician.country('Australia')
 australia.code # => "AU"
 senate = australia.legislature('Senate')
 senate.popolo # => #<Everypolitician::Popolo::JSON>
+
+united_kingdom = Everypolitician.country('UK')
+house_of_commons = united_kingdom.legislature('Commons')
+
+american_samoa = Everypolitician.country('American-Samoa')
+house_of_representatives = american_samoa.legislature('House')
+
+united_arab_emirates = Everypolitician.country('United-Arab-Emirates')
+national_council = united_arab_emirates.legislature('Federal-National-Council')
+
+algeria = Everypolitician.country('Algeria')
+national_assembly = algeria.legislature('Majlis')
 ```
 
 If you want to point at a different `countries.json`, e.g. a local path or a different url, you can set it like this:
