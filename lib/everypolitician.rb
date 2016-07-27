@@ -13,7 +13,7 @@ module Everypolitician
   end
 
   def self.countries_json
-    @countries_json ||= 'https://raw.githubusercontent.com/' \
+    @countries_json ||= 'https://cdn.rawgit.com/' \
       'everypolitician/everypolitician-data/master/countries.json'
   end
 
@@ -105,7 +105,7 @@ module Everypolitician
     end
 
     def popolo_url
-      @popolo_url ||= 'https://raw.githubusercontent.com/everypolitician' \
+      @popolo_url ||= 'https://cdn.rawgit.com/everypolitician' \
         "/everypolitician-data/#{sha}/#{raw_data[:popolo]}"
     end
 
@@ -151,7 +151,7 @@ module Everypolitician
     end
 
     def csv_url
-      @csv_url ||= 'https://raw.githubusercontent.com/everypolitician' \
+      @csv_url ||= 'https://cdn.rawgit.com/everypolitician' \
         "/everypolitician-data/#{legislature.sha}/#{raw_data[:csv]}"
     end
 
