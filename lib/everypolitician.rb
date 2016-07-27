@@ -127,6 +127,10 @@ module Everypolitician
       @index_by_sources ||= EveryPolitician.countries.map(&:legislatures).flatten.group_by(&:directory)
       @index_by_sources[dir][0]
     end
+
+    def to_s
+      @name
+    end
   end
 
   class LegislativePeriod
