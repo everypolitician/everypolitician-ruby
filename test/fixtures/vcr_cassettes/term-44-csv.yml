@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://raw.githubusercontent.com/everypolitician/everypolitician-data/master/countries.json
+    uri: https://cdn.rawgit.com/everypolitician/everypolitician-data/master/countries.json
     body:
       encoding: US-ASCII
       string: ''
@@ -18,52 +18,34 @@ http_interactions:
       code: 200
       message: OK
     headers:
-      Content-Security-Policy:
-      - default-src 'none'; style-src 'unsafe-inline'
-      Strict-Transport-Security:
-      - max-age=31536000
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - deny
-      X-Xss-Protection:
-      - 1; mode=block
-      Etag:
-      - '"4bd527756680f45fd72dd715ebb33b7bc4eff21c"'
-      Content-Type:
-      - text/plain; charset=utf-8
-      Cache-Control:
-      - max-age=300
-      X-Geo-Block-List:
-      - ''
-      X-Github-Request-Id:
-      - B91F121E:397A:316936:579776B7
-      Content-Length:
-      - '40507'
-      Accept-Ranges:
-      - bytes
       Date:
-      - Tue, 26 Jul 2016 14:42:00 GMT
-      Via:
-      - 1.1 varnish
+      - Wed, 27 Jul 2016 13:55:26 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
-      X-Served-By:
-      - cache-lcy1128-LCY
-      X-Cache:
-      - MISS
-      X-Cache-Hits:
-      - '0'
-      Vary:
-      - Authorization,Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Robots-Tag:
+      - none
       Access-Control-Allow-Origin:
       - "*"
-      X-Fastly-Request-Id:
-      - 38e3ce08d863016465f808d1ff8dd8d9dd746433
+      Etag:
+      - W/"4bd527756680f45fd72dd715ebb33b7bc4eff21c"
+      Cache-Control:
+      - max-age=315360000
+      Vary:
+      - Accept-Encoding
       Expires:
-      - Tue, 26 Jul 2016 14:47:00 GMT
-      Source-Age:
-      - '0'
+      - Thu, 31 Dec 2037 23:55:55 GMT
+      Rawgit-Cache-Status:
+      - MISS
+      Server:
+      - NetDNA-cache/2.2
+      X-Cache:
+      - HIT
     body:
       encoding: ASCII-8BIT
       string: !binary |-
@@ -9565,10 +9547,10 @@ http_interactions:
         CiAgICAgICAgICB9CiAgICAgICAgXSwKICAgICAgICAic3RhdGVtZW50X2Nv
         dW50IjogMzM0MQogICAgICB9CiAgICBdCiAgfQpd
     http_version: 
-  recorded_at: Tue, 26 Jul 2016 14:42:00 GMT
+  recorded_at: Wed, 27 Jul 2016 13:55:26 GMT
 - request:
     method: get
-    uri: https://raw.githubusercontent.com/everypolitician/everypolitician-data/ea04acd/data/Australia/Senate/term-44.csv
+    uri: https://cdn.rawgit.com/everypolitician/everypolitician-data/ea04acd/data/Australia/Senate/term-44.csv
     body:
       encoding: US-ASCII
       string: ''
@@ -9584,54 +9566,36 @@ http_interactions:
       code: 200
       message: OK
     headers:
-      Content-Security-Policy:
-      - default-src 'none'; style-src 'unsafe-inline'
-      Strict-Transport-Security:
-      - max-age=31536000
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - deny
-      X-Xss-Protection:
-      - 1; mode=block
-      Etag:
-      - '"a0bcbc44e9ccb608d102c19a60720866deb27d59"'
-      Content-Type:
-      - text/plain; charset=utf-8
-      Cache-Control:
-      - max-age=300
-      X-Geo-Block-List:
-      - ''
-      X-Github-Request-Id:
-      - B91F121B:102D:9DFBE:579776B8
-      Content-Length:
-      - '6610'
-      Accept-Ranges:
-      - bytes
       Date:
-      - Tue, 26 Jul 2016 14:42:00 GMT
-      Via:
-      - 1.1 varnish
+      - Wed, 27 Jul 2016 13:55:27 GMT
+      Content-Type:
+      - text/csv;charset=utf-8
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
-      X-Served-By:
-      - cache-lcy1125-LCY
-      X-Cache:
-      - MISS
-      X-Cache-Hits:
-      - '0'
-      Vary:
-      - Authorization,Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Robots-Tag:
+      - none
       Access-Control-Allow-Origin:
       - "*"
-      X-Fastly-Request-Id:
-      - 78dc08cd29941df64c2d51c398ffe9688771f116
+      Etag:
+      - '"a0bcbc44e9ccb608d102c19a60720866deb27d59"'
+      Cache-Control:
+      - max-age=315360000
+      Vary:
+      - Accept-Encoding
       Expires:
-      - Tue, 26 Jul 2016 14:47:00 GMT
-      Source-Age:
-      - '0'
+      - Thu, 31 Dec 2037 23:55:55 GMT
+      Rawgit-Cache-Status:
+      - HIT
+      Server:
+      - NetDNA-cache/2.2
+      X-Cache:
+      - HIT
     body:
-      encoding: ASCII-8BIT
+      encoding: UTF-8
       string: |
         id,name,sort_name,email,twitter,facebook,group,group_id,area_id,area,chamber,term,start_date,end_date,image,gender
         b6b705a5-0355-4f1c-8951-273aed19156d,Alan Eggleston,"Eggleston, Alan",senator.eggleston@aph.gov.au,,,Liberal Party,liberal_party_of_australia,area/wa,WA,Senate,44,,2014-06-30,http://parlinfo.aph.gov.au/parlInfo/download/handbook/allmps/4L6/upload_ref_binary/4L6.JPG,male
@@ -9736,5 +9700,5 @@ http_interactions:
         72d03e5d-8c81-492e-8dfe-914f5889c62a,Ursula Stephens,"Stephens, Ursula",senator.stephens@aph.gov.au,,,Australian Labor Party,australian_labor_party,area/nsw,NSW,Senate,44,,2014-06-30,http://parlinfo.aph.gov.au/parlInfo/download/handbook/allmps/00AOS/upload_ref_binary/00AOS.jpg,female
         c43e89a3-e635-4eae-a186-1b0d4802e0fa,Zed Seselja,"Seselja, Zed",senator.seselja@aph.gov.au,zedseselja,zed.seselja,Liberal Party,liberal_party_of_australia,area/act,ACT,Senate,44,,,http://parlinfo.aph.gov.au/parlInfo/download/handbook/allmps/HZE/upload_ref_binary/HZE.jpg,male
     http_version: 
-  recorded_at: Tue, 26 Jul 2016 14:42:00 GMT
+  recorded_at: Wed, 27 Jul 2016 13:55:27 GMT
 recorded_with: VCR 3.0.3
