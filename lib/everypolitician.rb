@@ -5,6 +5,8 @@ require 'everypolitician/popolo'
 require 'csv'
 
 module Everypolitician
+  CDN = 'https://cdn.rawgit.com'
+
   class Error < StandardError; end
 
   class << self
@@ -13,7 +15,7 @@ module Everypolitician
   end
 
   def self.countries_json
-    @countries_json ||= 'https://cdn.rawgit.com/' \
+    @countries_json ||= "#{CDN}/" \
       'everypolitician/everypolitician-data/master/countries.json'
   end
 
@@ -148,7 +150,7 @@ module Everypolitician
     end
 
     def csv_url
-      @csv_url ||= 'https://cdn.rawgit.com/everypolitician' \
+      @csv_url ||= "#{CDN}/everypolitician" \
         "/everypolitician-data/#{legislature.sha}/#{raw_data[:csv]}"
     end
 
