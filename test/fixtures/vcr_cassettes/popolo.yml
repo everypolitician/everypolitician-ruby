@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://raw.githubusercontent.com/everypolitician/everypolitician-data/master/countries.json
+    uri: https://cdn.rawgit.com/everypolitician/everypolitician-data/master/countries.json
     body:
       encoding: US-ASCII
       string: ''
@@ -18,52 +18,34 @@ http_interactions:
       code: 200
       message: OK
     headers:
-      Content-Security-Policy:
-      - default-src 'none'; style-src 'unsafe-inline'
-      Strict-Transport-Security:
-      - max-age=31536000
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - deny
-      X-Xss-Protection:
-      - 1; mode=block
-      Etag:
-      - '"4bd527756680f45fd72dd715ebb33b7bc4eff21c"'
-      Content-Type:
-      - text/plain; charset=utf-8
-      Cache-Control:
-      - max-age=300
-      X-Geo-Block-List:
-      - ''
-      X-Github-Request-Id:
-      - B91F121E:397B:61A7F4:57977C61
-      Content-Length:
-      - '40507'
-      Accept-Ranges:
-      - bytes
       Date:
-      - Tue, 26 Jul 2016 15:06:09 GMT
-      Via:
-      - 1.1 varnish
+      - Wed, 27 Jul 2016 13:55:25 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
-      X-Served-By:
-      - cache-lcy1135-LCY
-      X-Cache:
-      - MISS
-      X-Cache-Hits:
-      - '0'
-      Vary:
-      - Authorization,Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Robots-Tag:
+      - none
       Access-Control-Allow-Origin:
       - "*"
-      X-Fastly-Request-Id:
-      - b14729a84969806379f44385687741623070b3a4
+      Etag:
+      - W/"4bd527756680f45fd72dd715ebb33b7bc4eff21c"
+      Cache-Control:
+      - max-age=315360000
+      Vary:
+      - Accept-Encoding
       Expires:
-      - Tue, 26 Jul 2016 15:11:09 GMT
-      Source-Age:
-      - '0'
+      - Thu, 31 Dec 2037 23:55:55 GMT
+      Rawgit-Cache-Status:
+      - MISS
+      Server:
+      - NetDNA-cache/2.2
+      X-Cache:
+      - HIT
     body:
       encoding: ASCII-8BIT
       string: !binary |-
@@ -9565,10 +9547,10 @@ http_interactions:
         CiAgICAgICAgICB9CiAgICAgICAgXSwKICAgICAgICAic3RhdGVtZW50X2Nv
         dW50IjogMzM0MQogICAgICB9CiAgICBdCiAgfQpd
     http_version: 
-  recorded_at: Tue, 26 Jul 2016 15:06:10 GMT
+  recorded_at: Wed, 27 Jul 2016 13:55:25 GMT
 - request:
     method: get
-    uri: https://raw.githubusercontent.com/everypolitician/everypolitician-data/ea04acd/data/Australia/Senate/ep-popolo-v1.0.json
+    uri: https://cdn.rawgit.com/everypolitician/everypolitician-data/ea04acd/data/Australia/Senate/ep-popolo-v1.0.json
     body:
       encoding: US-ASCII
       string: ''
@@ -9584,52 +9566,34 @@ http_interactions:
       code: 200
       message: OK
     headers:
-      Content-Security-Policy:
-      - default-src 'none'; style-src 'unsafe-inline'
-      Strict-Transport-Security:
-      - max-age=31536000
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - deny
-      X-Xss-Protection:
-      - 1; mode=block
-      Etag:
-      - '"0d0aeb5c3d4c874967800d27cd4ed8d48a2a9ecf"'
-      Content-Type:
-      - text/plain; charset=utf-8
-      Cache-Control:
-      - max-age=300
-      X-Geo-Block-List:
-      - ''
-      X-Github-Request-Id:
-      - B91F1217:4A20:2E151C:57977C61
-      Content-Length:
-      - '70190'
-      Accept-Ranges:
-      - bytes
       Date:
-      - Tue, 26 Jul 2016 15:06:10 GMT
-      Via:
-      - 1.1 varnish
+      - Wed, 27 Jul 2016 13:55:25 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
-      X-Served-By:
-      - cache-lcy1131-LCY
-      X-Cache:
-      - MISS
-      X-Cache-Hits:
-      - '0'
-      Vary:
-      - Authorization,Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Robots-Tag:
+      - none
       Access-Control-Allow-Origin:
       - "*"
-      X-Fastly-Request-Id:
-      - b9683bbd961f0f8b6762a9cfb3fb91668714da51
+      Etag:
+      - W/"0d0aeb5c3d4c874967800d27cd4ed8d48a2a9ecf"
+      Cache-Control:
+      - max-age=315360000
+      Vary:
+      - Accept-Encoding
       Expires:
-      - Tue, 26 Jul 2016 15:11:10 GMT
-      Source-Age:
-      - '1'
+      - Thu, 31 Dec 2037 23:55:55 GMT
+      Rawgit-Cache-Status:
+      - MISS
+      Server:
+      - NetDNA-cache/2.2
+      X-Cache:
+      - HIT
     body:
       encoding: ASCII-8BIT
       string: !binary |-
@@ -30391,5 +30355,5 @@ http_interactions:
         ZWEvd2EiLAogICAgICAibmFtZSI6ICJXQSIsCiAgICAgICJ0eXBlIjogImNv
         bnN0aXR1ZW5jeSIKICAgIH0KICBdCn0=
     http_version: 
-  recorded_at: Tue, 26 Jul 2016 15:06:10 GMT
+  recorded_at: Wed, 27 Jul 2016 13:55:25 GMT
 recorded_with: VCR 3.0.3
