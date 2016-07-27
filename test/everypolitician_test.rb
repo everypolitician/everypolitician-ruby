@@ -6,7 +6,7 @@ class EverypoliticianTest < Minitest::Test
   def setup
     Everypolitician.countries = nil
     @current_sha = 'ea04acd'
-    @current_cdn = 'https://cdn.rawgit.com'
+    @current_cdn = Everypolitician::CDN
   end
 
   def test_that_it_has_a_version_number
