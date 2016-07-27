@@ -73,6 +73,10 @@ module Everypolitician
       fail Error, "Unknown legislature: #{query}" if legislature.nil?
       legislature
     end
+
+    def to_s
+      @name
+    end
   end
 
   class Legislature
