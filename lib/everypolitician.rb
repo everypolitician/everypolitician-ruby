@@ -71,7 +71,9 @@ module Everypolitician
 
     def legislature(query)
       query = { slug: query } if query.is_a?(String)
-      legislature = legislatures.find { |l| query.all? { |k, v| l.__send__(k) == v } }
+      legislature = legislatures.find do |l|
+        query.all? { |k, v| l.__send__(k).to_s.downcase == v.to_s.downcase }
+      end
       fail Error, "Unknown legislature: #{query}" if legislature.nil?
       legislature
     end
