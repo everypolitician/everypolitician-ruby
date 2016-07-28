@@ -21,6 +21,13 @@ class EverypoliticianTest < Minitest::Test
     end
   end
 
+  def test_find_country_is_case_insensitive
+    VCR.use_cassette('countries_json') do
+      country = Everypolitician::Country.find('new-zealand')
+      assert_equal 'New Zealand', country.name
+    end
+  end
+
   def test_legislature_find
     VCR.use_cassette('countries_json') do
       legislature = Everypolitician::Legislature.find('Australia', 'Senate')
