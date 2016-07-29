@@ -7,4 +7,9 @@ class EverypoliticianTest < Minitest::Test
     assert_equal 'name', entity.name
   end
 
+  def test_entity_uses_name_when_interpolated
+    entity = Everypolitician::Entity.new({name: 'name'})
+    assert_equal 'Fetching data for name', "Fetching data for #{entity}"
+  end
+
 end

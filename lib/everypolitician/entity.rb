@@ -6,6 +6,10 @@ module Everypolitician
     def initialize(data)
       @name = data[:name]
     end
+
+    def to_s
+      @name
+    end
   end
 
 end
