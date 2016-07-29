@@ -3,6 +3,7 @@ require 'json'
 require 'open-uri'
 require 'everypolitician/popolo'
 require 'csv'
+require 'everypolitician/entity'
 
 module Everypolitician
   class Error < StandardError; end
@@ -39,8 +40,7 @@ module Everypolitician
     [country, legislature]
   end
 
-  class Country
-    attr_reader :name
+  class Country < Entity
     attr_reader :code
     attr_reader :slug
     attr_reader :raw_data
@@ -53,7 +53,7 @@ module Everypolitician
     end
 
     def initialize(country_data)
-      @name = country_data[:name]
+      super(country_data)
       @code = country_data[:code]
       @slug = country_data[:slug]
       @raw_data = country_data
@@ -73,10 +73,10 @@ module Everypolitician
       fail Error, "Unknown legislature: #{query}" if legislature.nil?
       legislature
     end
+
   end
 
-  class Legislature
-    attr_reader :name
+  class Legislature < Entity
     attr_reader :slug
     attr_reader :lastmod
     attr_reader :person_count
@@ -90,7 +90,7 @@ module Everypolitician
     end
 
     def initialize(legislature_data, country)
-      @name = legislature_data[:name]
+      super(legislature_data)
       @slug = legislature_data[:slug]
       @lastmod = legislature_data[:lastmod]
       @person_count = legislature_data[:person_count]
@@ -123,19 +123,19 @@ module Everypolitician
       @index_by_sources ||= EveryPolitician.countries.map(&:legislatures).flatten.group_by(&:directory)
       @index_by_sources[dir][0]
     end
+
   end
 
-  class LegislativePeriod
+  class LegislativePeriod < Entity
     attr_reader :id
-    attr_reader :name
     attr_reader :slug
     attr_reader :legislature
     attr_reader :country
     attr_reader :raw_data
 
     def initialize(legislative_period_data, legislature, country)
+      super(legislative_period_data)
       @id = legislative_period_data[:id]
-      @name = legislative_period_data[:name]
       @slug = legislative_period_data[:slug]
       @legislature = legislature
       @country = country
