@@ -132,17 +132,16 @@ module Everypolitician
     end
   end
 
-  class LegislativePeriod
+  class LegislativePeriod < Entity
     attr_reader :id
-    attr_reader :name
     attr_reader :slug
     attr_reader :legislature
     attr_reader :country
     attr_reader :raw_data
 
     def initialize(legislative_period_data, legislature, country)
+      super(legislative_period_data)
       @id = legislative_period_data[:id]
-      @name = legislative_period_data[:name]
       @slug = legislative_period_data[:slug]
       @legislature = legislature
       @country = country
