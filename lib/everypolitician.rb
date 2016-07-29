@@ -163,10 +163,6 @@ module Everypolitician
       raw_data[key]
     end
 
-    def to_s
-      @name
-    end
-
     private
 
     def parse_partial_date(date)
