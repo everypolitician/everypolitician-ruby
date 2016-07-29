@@ -5,7 +5,6 @@ class EverypoliticianTest < Minitest::Test
   # Clear the countries.json cache before each run
   def setup
     Everypolitician.countries = nil
-    @current_sha = 'ea04acd'
   end
 
   def test_that_it_has_a_version_number
@@ -25,7 +24,7 @@ class EverypoliticianTest < Minitest::Test
     VCR.use_cassette('countries_json') do
       legislature = Everypolitician::Legislature.find('Australia', 'Senate')
       assert_equal 'Senate', legislature.name
-      assert_equal "https://raw.githubusercontent.com/everypolitician/everypolitician-data/#{@current_sha}/data/Australia/Senate/ep-popolo-v1.0.json", legislature.popolo_url
+      assert %r{https://raw.githubusercontent.com/everypolitician/everypolitician-data/\w+?/data/Australia/Senate/ep-popolo-v1.0.json}.match(legislature.popolo_url)
       assert legislature.legislative_periods.is_a?(Array)
     end
   end
@@ -43,7 +42,7 @@ class EverypoliticianTest < Minitest::Test
     VCR.use_cassette('countries_json') do
       legislature = Everypolitician.legislature('Australia', 'Senate')
       assert_equal 'Senate', legislature.name
-      assert_equal "https://raw.githubusercontent.com/everypolitician/everypolitician-data/#{@current_sha}/data/Australia/Senate/ep-popolo-v1.0.json", legislature.popolo_url
+      assert %r{https://raw.githubusercontent.com/everypolitician/everypolitician-data/\w+?/data/Australia/Senate/ep-popolo-v1.0.json}.match(legislature.popolo_url)
       assert legislature.legislative_periods.is_a?(Array)
     end
   end
@@ -55,7 +54,7 @@ class EverypoliticianTest < Minitest::Test
       assert_equal 'AU', country.code
       assert_equal 2, country.legislatures.size
       assert_equal 'Senate', legislature.name
-      assert_equal "https://raw.githubusercontent.com/everypolitician/everypolitician-data/#{@current_sha}/data/Australia/Senate/ep-popolo-v1.0.json", legislature.popolo_url
+      assert %r{https://raw.githubusercontent.com/everypolitician/everypolitician-data/\w+?/data/Australia/Senate/ep-popolo-v1.0.json}.match(legislature.popolo_url)
       assert_equal 'Australia/Senate', legislature.directory
       assert legislature.legislative_periods.is_a?(Array)
     end
@@ -146,7 +145,7 @@ class EverypoliticianTest < Minitest::Test
       assert_equal '44th Parliament', lp.name
       assert_equal Date.new(2013, 9, 7), lp.start_date
       assert_equal '44', lp.slug
-      assert_equal "https://raw.githubusercontent.com/everypolitician/everypolitician-data/#{@current_sha}/data/Australia/Senate/term-44.csv", lp.csv_url
+      assert %r{https://raw.githubusercontent.com/everypolitician/everypolitician-data/\w+?/data/Australia/Senate/term-44.csv}.match(lp.csv_url)
       assert_equal 'Senate', lp.legislature.name
       assert_equal 'Australia', lp.country.name
     end
@@ -196,13 +195,11 @@ class EverypoliticianTest < Minitest::Test
   end
 
   def test_lastmod_is_a_time
-    VCR.use_cassette('countries_json') do
-      australian_senate = Everypolitician.country(slug: 'Australia').legislature(slug: 'Senate')
-      assert_equal 2016, australian_senate.lastmod.year
-      assert_equal 7, australian_senate.lastmod.month
-      assert_equal 24, australian_senate.lastmod.day
-      assert_equal 17, australian_senate.lastmod.hour
-    end
+    legislature = Everypolitician::Legislature.new({lastmod: '1469382925'}, nil)
+    assert_equal 2016, legislature.lastmod.year
+    assert_equal 7, legislature.lastmod.month
+    assert_equal 24, legislature.lastmod.day
+    assert_equal 17, legislature.lastmod.hour
   end
 
 end
