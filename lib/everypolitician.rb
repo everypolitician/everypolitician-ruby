@@ -74,9 +74,6 @@ module Everypolitician
       legislature
     end
 
-    def to_s
-      @name
-    end
   end
 
   class Legislature < Entity
