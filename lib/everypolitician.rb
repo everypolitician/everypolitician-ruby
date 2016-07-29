@@ -124,9 +124,6 @@ module Everypolitician
       @index_by_sources[dir][0]
     end
 
-    def to_s
-      @name
-    end
   end
 
   class LegislativePeriod < Entity

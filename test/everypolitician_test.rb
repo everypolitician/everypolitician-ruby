@@ -195,13 +195,6 @@ class EverypoliticianTest < Minitest::Test
     end
   end
 
-  def test_legislature_uses_name_when_interpolated
-    VCR.use_cassette('countries_json') do
-      legislature = Everypolitician.country('UK').legislature('Commons')
-      assert_equal 'Fetching data for House of Commons', "Fetching data for #{legislature}"
-    end
-  end
-
   def test_legislative_period_uses_name_when_interpolated
     VCR.use_cassette('countries_json') do
       au_first_legislative_period = Everypolitician
