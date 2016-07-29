@@ -79,8 +79,7 @@ module Everypolitician
     end
   end
 
-  class Legislature
-    attr_reader :name
+  class Legislature < Entity
     attr_reader :slug
     attr_reader :lastmod
     attr_reader :person_count
@@ -94,7 +93,7 @@ module Everypolitician
     end
 
     def initialize(legislature_data, country)
-      @name = legislature_data[:name]
+      super(legislature_data)
       @slug = legislature_data[:slug]
       @lastmod = legislature_data[:lastmod]
       @person_count = legislature_data[:person_count]
