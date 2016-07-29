@@ -3,6 +3,7 @@ require 'json'
 require 'open-uri'
 require 'everypolitician/popolo'
 require 'csv'
+require 'everypolitician/entity'
 
 module Everypolitician
   class Error < StandardError; end
