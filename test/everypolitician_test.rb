@@ -195,4 +195,14 @@ class EverypoliticianTest < Minitest::Test
     end
   end
 
+  def test_lastmod_is_a_time
+    VCR.use_cassette('countries_json') do
+      australian_senate = Everypolitician.country(slug: 'Australia').legislature(slug: 'Senate')
+      assert_equal 2016, australian_senate.lastmod.year
+      assert_equal 7, australian_senate.lastmod.month
+      assert_equal 24, australian_senate.lastmod.day
+      assert_equal 17, australian_senate.lastmod.hour
+    end
+  end
+
 end

@@ -92,7 +92,7 @@ module Everypolitician
     def initialize(legislature_data, country)
       @name = legislature_data[:name]
       @slug = legislature_data[:slug]
-      @lastmod = legislature_data[:lastmod]
+      @lastmod = to_UTC_time(legislature_data[:lastmod])
       @person_count = legislature_data[:person_count]
       @sha = legislature_data[:sha]
       @statement_count = legislature_data[:statement_count]
@@ -123,6 +123,13 @@ module Everypolitician
       @index_by_sources ||= EveryPolitician.countries.map(&:legislatures).flatten.group_by(&:directory)
       @index_by_sources[dir][0]
     end
+
+    private
+
+    def to_UTC_time(string_time)
+      Time.at(string_time.to_i).gmtime
+    end
+
   end
 
   class LegislativePeriod

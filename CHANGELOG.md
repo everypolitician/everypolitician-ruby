@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.9.0] - 2016-07-28
+
+### Added
+
+- The`Legislature#lastmod` attribute now returns a Time object instead of just
+a string with the time in seconds.
+
 ## [0.8.0] - 2016-07-26
 
 ### Added
