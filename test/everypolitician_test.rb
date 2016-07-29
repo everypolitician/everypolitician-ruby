@@ -5,7 +5,7 @@ class EverypoliticianTest < Minitest::Test
   # Clear the countries.json cache before each run
   def setup
     Everypolitician.countries = nil
-    @current_sha = 'ea04acd'
+    @current_sha = '9fb1d17'
   end
 
   def test_that_it_has_a_version_number
@@ -200,8 +200,8 @@ class EverypoliticianTest < Minitest::Test
       australian_senate = Everypolitician.country(slug: 'Australia').legislature(slug: 'Senate')
       assert_equal 2016, australian_senate.lastmod.year
       assert_equal 7, australian_senate.lastmod.month
-      assert_equal 24, australian_senate.lastmod.day
-      assert_equal 17, australian_senate.lastmod.hour
+      assert_equal 27, australian_senate.lastmod.day
+      assert_equal 23, australian_senate.lastmod.hour
     end
   end
 
