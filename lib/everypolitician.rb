@@ -40,8 +40,7 @@ module Everypolitician
     [country, legislature]
   end
 
-  class Country
-    attr_reader :name
+  class Country < Entity
     attr_reader :code
     attr_reader :slug
     attr_reader :raw_data
@@ -54,7 +53,7 @@ module Everypolitician
     end
 
     def initialize(country_data)
-      @name = country_data[:name]
+      super(country_data)
       @code = country_data[:code]
       @slug = country_data[:slug]
       @raw_data = country_data
