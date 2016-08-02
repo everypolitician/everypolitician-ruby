@@ -84,6 +84,7 @@ module Everypolitician
     attr_reader :country
     attr_reader :raw_data
     attr_reader :statement_count
+    attr_reader :popolo_url
 
     def self.find(country_slug, legislature_slug)
       Country.find(country_slug).legislature(legislature_slug)
@@ -96,17 +97,13 @@ module Everypolitician
       @person_count = legislature_data[:person_count]
       @sha = legislature_data[:sha]
       @statement_count = legislature_data[:statement_count]
+      @popolo_url = legislature_data[:popolo_url]
       @raw_data = legislature_data
       @country = country
     end
 
     def popolo
       @popolo ||= Everypolitician::Popolo.parse(open(popolo_url).read)
-    end
-
-    def popolo_url
-      @popolo_url ||= 'https://raw.githubusercontent.com/everypolitician' \
-        "/everypolitician-data/#{sha}/#{raw_data[:popolo]}"
     end
 
     def legislative_periods
