@@ -29,7 +29,7 @@ http_interactions:
       X-Xss-Protection:
       - 1; mode=block
       Etag:
-      - '"8ed68a61312d274dd268d6a8dbca06046316abeb"'
+      - '"c324ab7ad15e187acbd934d602d64652512d8359"'
       Content-Type:
       - text/plain; charset=utf-8
       Cache-Control:
@@ -37,33 +37,33 @@ http_interactions:
       X-Geo-Block-List:
       - ''
       X-Github-Request-Id:
-      - B91F121E:397B:34374FE:57A0B606
+      - B91F121E:397B:35C4D89:57A0F587
       Content-Length:
-      - '40680'
+      - '40681'
       Accept-Ranges:
       - bytes
       Date:
-      - Tue, 02 Aug 2016 15:06:12 GMT
+      - Tue, 02 Aug 2016 19:33:28 GMT
       Via:
       - 1.1 varnish
       Connection:
       - keep-alive
       X-Served-By:
-      - cache-lcy1124-LCY
+      - cache-lcy1129-LCY
       X-Cache:
-      - HIT
+      - MISS
       X-Cache-Hits:
-      - '1'
+      - '0'
       Vary:
       - Authorization,Accept-Encoding
       Access-Control-Allow-Origin:
       - "*"
       X-Fastly-Request-Id:
-      - 906ee361d19d422f0d8122c5684d7e4c647aa769
+      - a961d03dc7a5cec05d162d4d1226d4e32f011e81
       Expires:
-      - Tue, 02 Aug 2016 15:11:12 GMT
+      - Tue, 02 Aug 2016 19:38:28 GMT
       Source-Age:
-      - '221'
+      - '0'
     body:
       encoding: ASCII-8BIT
       string: !binary |-
@@ -6655,20 +6655,20 @@ http_interactions:
         cmVjdG9yeSI6ICJkYXRhL1J1c3NpYS9EdW1hL3NvdXJjZXMiLAogICAgICAg
         ICJwb3BvbG8iOiAiZGF0YS9SdXNzaWEvRHVtYS9lcC1wb3BvbG8tdjEuMC5q
         c29uIiwKICAgICAgICAicG9wb2xvX3VybCI6ICJodHRwczovL2Nkbi5yYXdn
-        aXQuY29tL2V2ZXJ5cG9saXRpY2lhbi9ldmVyeXBvbGl0aWNpYW4tZGF0YS85
-        NzhmMGFlL2RhdGEvUnVzc2lhL0R1bWEvZXAtcG9wb2xvLXYxLjAuanNvbiIs
+        aXQuY29tL2V2ZXJ5cG9saXRpY2lhbi9ldmVyeXBvbGl0aWNpYW4tZGF0YS83
+        ZjgyZjRmL2RhdGEvUnVzc2lhL0R1bWEvZXAtcG9wb2xvLXYxLjAuanNvbiIs
         CiAgICAgICAgIm5hbWVzIjogImRhdGEvUnVzc2lhL0R1bWEvbmFtZXMuY3N2
-        IiwKICAgICAgICAibGFzdG1vZCI6ICIxNDY5Mzg1MDY3IiwKICAgICAgICAi
-        cGVyc29uX2NvdW50IjogNDY5LAogICAgICAgICJzaGEiOiAiOTc4ZjBhZSIs
+        IiwKICAgICAgICAibGFzdG1vZCI6ICIxNDcwMTUwNTk2IiwKICAgICAgICAi
+        cGVyc29uX2NvdW50IjogNDY5LAogICAgICAgICJzaGEiOiAiN2Y4MmY0ZiIs
         CiAgICAgICAgImxlZ2lzbGF0aXZlX3BlcmlvZHMiOiBbCiAgICAgICAgICB7
         CiAgICAgICAgICAgICJpZCI6ICJ0ZXJtLzYiLAogICAgICAgICAgICAibmFt
         ZSI6ICI2dGggQ29udm9jYXRpb24iLAogICAgICAgICAgICAic3RhcnRfZGF0
         ZSI6ICIyMDExLTEyLTA0IiwKICAgICAgICAgICAgInNsdWciOiAiNiIsCiAg
         ICAgICAgICAgICJjc3YiOiAiZGF0YS9SdXNzaWEvRHVtYS90ZXJtLTYuY3N2
         IiwKICAgICAgICAgICAgImNzdl91cmwiOiAiaHR0cHM6Ly9jZG4ucmF3Z2l0
-        LmNvbS9ldmVyeXBvbGl0aWNpYW4vZXZlcnlwb2xpdGljaWFuLWRhdGEvNGRh
-        NjIxMS9kYXRhL1J1c3NpYS9EdW1hL3Rlcm0tNi5jc3YiCiAgICAgICAgICB9
-        CiAgICAgICAgXSwKICAgICAgICAic3RhdGVtZW50X2NvdW50IjogMTk2MzUK
+        LmNvbS9ldmVyeXBvbGl0aWNpYW4vZXZlcnlwb2xpdGljaWFuLWRhdGEvN2Y4
+        MmY0Zi9kYXRhL1J1c3NpYS9EdW1hL3Rlcm0tNi5jc3YiCiAgICAgICAgICB9
+        CiAgICAgICAgXSwKICAgICAgICAic3RhdGVtZW50X2NvdW50IjogMTk2NDYK
         ICAgICAgfQogICAgXQogIH0sCiAgewogICAgIm5hbWUiOiAiUndhbmRhIiwK
         ICAgICJjb3VudHJ5IjogIlJ3YW5kYSIsCiAgICAiY29kZSI6ICJSVyIsCiAg
         ICAic2x1ZyI6ICJSd2FuZGEiLAogICAgImxlZ2lzbGF0dXJlcyI6IFsKICAg
@@ -9574,10 +9574,10 @@ http_interactions:
         XSwKICAgICAgICAic3RhdGVtZW50X2NvdW50IjogMzM0MQogICAgICB9CiAg
         ICBdCiAgfQpd
     http_version: 
-  recorded_at: Tue, 02 Aug 2016 15:06:12 GMT
+  recorded_at: Tue, 02 Aug 2016 19:33:28 GMT
 - request:
     method: get
-    uri: https://raw.githubusercontent.com/everypolitician/everypolitician-data/9fb1d17/data/Australia/Senate/ep-popolo-v1.0.json
+    uri: https://cdn.rawgit.com/everypolitician/everypolitician-data/9fb1d17/data/Australia/Senate/ep-popolo-v1.0.json
     body:
       encoding: US-ASCII
       string: ''
@@ -9593,52 +9593,34 @@ http_interactions:
       code: 200
       message: OK
     headers:
-      Content-Security-Policy:
-      - default-src 'none'; style-src 'unsafe-inline'
-      Strict-Transport-Security:
-      - max-age=31536000
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - deny
-      X-Xss-Protection:
-      - 1; mode=block
-      Etag:
-      - '"bead0e9e4f012eb7970b42d0d361d3928ff685f1"'
-      Content-Type:
-      - text/plain; charset=utf-8
-      Cache-Control:
-      - max-age=300
-      X-Geo-Block-List:
-      - ''
-      X-Github-Request-Id:
-      - B91F1219:2E3BD:3588A5E:57A0B6E3
-      Content-Length:
-      - '70209'
-      Accept-Ranges:
-      - bytes
       Date:
-      - Tue, 02 Aug 2016 15:06:12 GMT
-      Via:
-      - 1.1 varnish
+      - Tue, 02 Aug 2016 19:33:29 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
       Connection:
       - keep-alive
-      X-Served-By:
-      - cache-lcy1131-LCY
-      X-Cache:
-      - MISS
-      X-Cache-Hits:
-      - '0'
-      Vary:
-      - Authorization,Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Robots-Tag:
+      - none
       Access-Control-Allow-Origin:
       - "*"
-      X-Fastly-Request-Id:
-      - 3075c62cc77f4e39c2db0124bcfe34a45e37e25f
+      Etag:
+      - W/"bead0e9e4f012eb7970b42d0d361d3928ff685f1"
+      Cache-Control:
+      - max-age=315360000
+      Vary:
+      - Accept-Encoding
       Expires:
-      - Tue, 02 Aug 2016 15:11:12 GMT
-      Source-Age:
-      - '0'
+      - Thu, 31 Dec 2037 23:55:55 GMT
+      Rawgit-Cache-Status:
+      - MISS
+      Server:
+      - NetDNA-cache/2.2
+      X-Cache:
+      - MISS
     body:
       encoding: ASCII-8BIT
       string: !binary |-
@@ -30402,5 +30384,5 @@ http_interactions:
         CiAgICB7CiAgICAgICJpZCI6ICJhcmVhL3dhIiwKICAgICAgIm5hbWUiOiAi
         V0EiLAogICAgICAidHlwZSI6ICJjb25zdGl0dWVuY3kiCiAgICB9CiAgXQp9
     http_version: 
-  recorded_at: Tue, 02 Aug 2016 15:06:12 GMT
+  recorded_at: Tue, 02 Aug 2016 19:33:30 GMT
 recorded_with: VCR 3.0.3
