@@ -100,7 +100,7 @@ class EverypoliticianTest < Minitest::Test
   end
 
   def test_retrieving_popolo
-    VCR.use_cassette('popolo') do
+    VCR.use_cassette('popolo', :record => :new_episodes) do
       australia_senate = Everypolitician.legislature('Australia', 'Senate')
       assert_instance_of Everypolitician::Popolo::JSON, australia_senate.popolo
     end
