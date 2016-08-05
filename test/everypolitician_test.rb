@@ -1,5 +1,7 @@
 require 'test_helper'
 
+CDN = 'https://cdn.rawgit.com'.freeze
+
 class EverypoliticianTest < Minitest::Test
   # Clear the countries.json cache before each run
   def setup
@@ -23,7 +25,7 @@ class EverypoliticianTest < Minitest::Test
     VCR.use_cassette('countries_json') do
       legislature = Everypolitician::Legislature.find('Australia', 'Senate')
       assert_equal 'Senate', legislature.name
-      assert %r{https://cdn.rawgit.com/everypolitician/everypolitician-data/\w+?/data/Australia/Senate/ep-popolo-v1.0.json}.match(legislature.popolo_url)
+      assert %r{#{CDN}/everypolitician/everypolitician-data/\w+?/data/Australia/Senate/ep-popolo-v1.0.json}.match(legislature.popolo_url)
       assert legislature.legislative_periods.is_a?(Array)
     end
   end
@@ -41,7 +43,7 @@ class EverypoliticianTest < Minitest::Test
     VCR.use_cassette('countries_json') do
       legislature = Everypolitician.legislature('Australia', 'Senate')
       assert_equal 'Senate', legislature.name
-      assert %r{https://cdn.rawgit.com/everypolitician/everypolitician-data/\w+?/data/Australia/Senate/ep-popolo-v1.0.json}.match(legislature.popolo_url)
+      assert %r{#{CDN}/everypolitician/everypolitician-data/\w+?/data/Australia/Senate/ep-popolo-v1.0.json}.match(legislature.popolo_url)
       assert legislature.legislative_periods.is_a?(Array)
     end
   end
@@ -53,7 +55,7 @@ class EverypoliticianTest < Minitest::Test
       assert_equal 'AU', country.code
       assert_equal 2, country.legislatures.size
       assert_equal 'Senate', legislature.name
-      assert %r{https://cdn.rawgit.com/everypolitician/everypolitician-data/\w+?/data/Australia/Senate/ep-popolo-v1.0.json}.match(legislature.popolo_url)
+      assert %r{#{CDN}/everypolitician/everypolitician-data/\w+?/data/Australia/Senate/ep-popolo-v1.0.json}.match(legislature.popolo_url)
       assert_equal 'Australia/Senate', legislature.directory
       assert legislature.legislative_periods.is_a?(Array)
     end
