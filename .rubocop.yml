@@ -1,0 +1,55 @@
+AllCops:
+  TargetRubyVersion: 2.0
+
+Style/AlignHash:
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle: table
+
+Style/ClassAndModuleCamelCase:
+  Enabled: false
+
+Style/CollectionMethods:
+  Enabled: true
+
+Style/Documentation:
+  Enabled: false
+
+Style/FormatString:
+  EnforcedStyle: percent
+
+Style/HashSyntax:
+  EnforcedStyle: ruby19_no_mixed_keys
+
+Style/RescueModifier:
+  Enabled: false
+
+Style/SignalException:
+  Enabled: false
+
+Style/SymbolArray:
+  Enabled: true
+
+Style/TrailingCommaInLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+
+Metrics/ClassLength:
+  Max: 250
+
+Metrics/MethodLength:
+  Max: 20
+
+Metrics/LineLength:
+  Max: 150
+
+Metrics/AbcSize:
+  Max: 50
+
+Metrics/CyclomaticComplexity:
+  Max: 7
+
+Metrics/PerceivedComplexity:
+  Max: 8
+
+
+inherit_from: .rubocop_todo.yml
