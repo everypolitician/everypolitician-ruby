@@ -108,12 +108,12 @@ module Everypolitician
 
     def legislative_periods
       @legislative_periods ||= raw_data[:legislative_periods].map do |lp|
-        LegislativePeriod.new(lp, self, self.country)
+        LegislativePeriod.new(lp, self, country)
       end
     end
 
     def directory
-      @directory = raw_data[:sources_directory].split('/')[1,2].join('/')
+      @directory = raw_data[:sources_directory].split('/')[1, 2].join('/')
     end
 
     def self.from_sources_dir(dir)
@@ -126,7 +126,6 @@ module Everypolitician
     def to_UTC_time(string_time)
       Time.at(string_time.to_i).gmtime
     end
-
   end
 
   class LegislativePeriod

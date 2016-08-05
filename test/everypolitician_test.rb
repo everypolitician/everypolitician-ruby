@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class EverypoliticianTest < Minitest::Test
-
   # Clear the countries.json cache before each run
   def setup
     Everypolitician.countries = nil
@@ -100,7 +99,7 @@ class EverypoliticianTest < Minitest::Test
   end
 
   def test_retrieving_popolo
-    VCR.use_cassette('popolo', :record => :new_episodes) do
+    VCR.use_cassette('popolo', record: :new_episodes) do
       australia_senate = Everypolitician.legislature('Australia', 'Senate')
       assert_instance_of Everypolitician::Popolo::JSON, australia_senate.popolo
     end
@@ -190,16 +189,15 @@ class EverypoliticianTest < Minitest::Test
   def test_expose_the_statement_count_of_a_legislature
     VCR.use_cassette('countries_json') do
       uganda_parliament = Everypolitician.country(slug: 'Uganda').legislature(slug: 'Parliament')
-      assert_equal 18031, uganda_parliament.statement_count
+      assert_equal 18_031, uganda_parliament.statement_count
     end
   end
 
   def test_lastmod_is_a_time
-    legislature = Everypolitician::Legislature.new({lastmod: '1469382925'}, nil)
+    legislature = Everypolitician::Legislature.new({ lastmod: '1469382925' }, nil)
     assert_equal 2016, legislature.lastmod.year
-    assert_equal    7, legislature.lastmod.month
+    assert_equal 7, legislature.lastmod.month
     assert_equal   24, legislature.lastmod.day
     assert_equal   17, legislature.lastmod.hour
   end
-
 end
