@@ -78,7 +78,7 @@ module Everypolitician
   class Legislature
     attr_reader :name
     attr_reader :slug
-    attr_reader :lastmod
+    attr_reader :lastmod_str
     attr_reader :person_count
     attr_reader :sha
     attr_reader :country
@@ -93,7 +93,7 @@ module Everypolitician
     def initialize(legislature_data, country)
       @name = legislature_data[:name]
       @slug = legislature_data[:slug]
-      @lastmod = to_UTC_time(legislature_data[:lastmod])
+      @lastmod_str = legislature_data[:lastmod]
       @person_count = legislature_data[:person_count]
       @sha = legislature_data[:sha]
       @statement_count = legislature_data[:statement_count]
@@ -121,10 +121,8 @@ module Everypolitician
       @index_by_sources[dir][0]
     end
 
-    private
-
-    def to_UTC_time(string_time)
-      Time.at(string_time.to_i).gmtime
+    def lastmod
+      Time.at(lastmod_str.to_i).gmtime
     end
   end
 
