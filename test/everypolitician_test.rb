@@ -24,7 +24,7 @@ class EverypoliticianTest < Minitest::Test
     VCR.use_cassette('countries_json') do
       legislature = Everypolitician::Legislature.find('Australia', 'Senate')
       assert_equal 'Senate', legislature.name
-      assert %r{https://raw.githubusercontent.com/everypolitician/everypolitician-data/\w+?/data/Australia/Senate/ep-popolo-v1.0.json}.match(legislature.popolo_url)
+      assert %r{https://cdn.rawgit.com/everypolitician/everypolitician-data/\w+?/data/Australia/Senate/ep-popolo-v1.0.json}.match(legislature.popolo_url)
       assert legislature.legislative_periods.is_a?(Array)
     end
   end
@@ -42,7 +42,7 @@ class EverypoliticianTest < Minitest::Test
     VCR.use_cassette('countries_json') do
       legislature = Everypolitician.legislature('Australia', 'Senate')
       assert_equal 'Senate', legislature.name
-      assert %r{https://raw.githubusercontent.com/everypolitician/everypolitician-data/\w+?/data/Australia/Senate/ep-popolo-v1.0.json}.match(legislature.popolo_url)
+      assert %r{https://cdn.rawgit.com/everypolitician/everypolitician-data/\w+?/data/Australia/Senate/ep-popolo-v1.0.json}.match(legislature.popolo_url)
       assert legislature.legislative_periods.is_a?(Array)
     end
   end
@@ -54,7 +54,7 @@ class EverypoliticianTest < Minitest::Test
       assert_equal 'AU', country.code
       assert_equal 2, country.legislatures.size
       assert_equal 'Senate', legislature.name
-      assert %r{https://raw.githubusercontent.com/everypolitician/everypolitician-data/\w+?/data/Australia/Senate/ep-popolo-v1.0.json}.match(legislature.popolo_url)
+      assert %r{https://cdn.rawgit.com/everypolitician/everypolitician-data/\w+?/data/Australia/Senate/ep-popolo-v1.0.json}.match(legislature.popolo_url)
       assert_equal 'Australia/Senate', legislature.directory
       assert legislature.legislative_periods.is_a?(Array)
     end
@@ -100,7 +100,7 @@ class EverypoliticianTest < Minitest::Test
   end
 
   def test_retrieving_popolo
-    VCR.use_cassette('popolo') do
+    VCR.use_cassette('popolo', :record => :new_episodes) do
       australia_senate = Everypolitician.legislature('Australia', 'Senate')
       assert_instance_of Everypolitician::Popolo::JSON, australia_senate.popolo
     end
@@ -197,9 +197,9 @@ class EverypoliticianTest < Minitest::Test
   def test_lastmod_is_a_time
     legislature = Everypolitician::Legislature.new({lastmod: '1469382925'}, nil)
     assert_equal 2016, legislature.lastmod.year
-    assert_equal 7, legislature.lastmod.month
-    assert_equal 24, legislature.lastmod.day
-    assert_equal 17, legislature.lastmod.hour
+    assert_equal    7, legislature.lastmod.month
+    assert_equal   24, legislature.lastmod.day
+    assert_equal   17, legislature.lastmod.hour
   end
 
 end
