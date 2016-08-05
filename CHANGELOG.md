@@ -3,17 +3,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [1.0.0] - 2016-08-04
+## [0.10.0] - 2016-08-04
 
 ### Changed
 
-- The code now uses the `popolo_url` field from the data, instead of building the popolo url manually.
-
-- It updates the relevant urls in the tests. The `test_retrieving_popolo` test had to be updated with `:record => :new_episodes` so that the URL to fetch from is updated.
-
-### Removed
-
-- The method for the manual construction of the `popolo_url`
+- The code now uses the `popolo_url` field from the data, so the url host has changed from `raw.githubusercontent.com` to `cdn.rawgit.com`.
 
 ## [0.9.0] - 2016-07-28
 
