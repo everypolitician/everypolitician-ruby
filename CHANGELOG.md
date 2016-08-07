@@ -3,11 +3,18 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.11.0] - 2016-08-07
+
+### Added
+
+- Searches by slug for a Country or a Legislature are now case insensitive
+
 ## [0.10.0] - 2016-08-04
 
 ### Changed
 
-- The code now uses the `popolo_url` field from the data, so the url host has changed from `raw.githubusercontent.com` to `cdn.rawgit.com`.
+- The code now uses the `popolo_url` field from the data, so the url
+  host has changed from `raw.githubusercontent.com` to `cdn.rawgit.com`.
 
 ## [0.9.0] - 2016-07-28
 
