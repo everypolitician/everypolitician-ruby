@@ -21,12 +21,33 @@ class EverypoliticianTest < Minitest::Test
     end
   end
 
+  def test_finds_country_by_hash_pair
+    VCR.use_cassette('countries_json') do
+      country = Everypolitician::Country.find(slug: 'Australia')
+      assert_equal 'Australia', country.name
+    end
+  end
+
+  def test_find_country_is_case_insensitive
+    VCR.use_cassette('countries_json') do
+      country = Everypolitician::Country.find('new-zealand')
+      assert_equal 'New Zealand', country.name
+    end
+  end
+
   def test_legislature_find
     VCR.use_cassette('countries_json') do
       legislature = Everypolitician::Legislature.find('Australia', 'Senate')
       assert_equal 'Senate', legislature.name
       assert %r{#{CDN}/everypolitician/everypolitician-data/\w+?/data/Australia/Senate/ep-popolo-v1.0.json}.match(legislature.popolo_url)
       assert legislature.legislative_periods.is_a?(Array)
+    end
+  end
+
+  def test_find_legislature_is_case_insensitive
+    VCR.use_cassette('countries_json') do
+      legislature = Everypolitician::Legislature.find('UK', 'commons')
+      assert_equal 'House of Commons', legislature.name
     end
   end
 

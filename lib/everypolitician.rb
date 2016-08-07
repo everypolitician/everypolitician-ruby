@@ -47,7 +47,9 @@ module Everypolitician
 
     def self.find(query)
       query = { slug: query } if query.is_a?(String)
-      country = Everypolitician.countries.find { |c| query.all? { |k, v| c[k] == v } }
+      country = Everypolitician.countries.find do |c|
+        query.all? { |k, v| c[k].to_s.downcase == v.to_s.downcase }
+      end
       fail Error, "Couldn't find country for query: #{query}" if country.nil?
       new(country)
     end
@@ -69,7 +71,9 @@ module Everypolitician
 
     def legislature(query)
       query = { slug: query } if query.is_a?(String)
-      legislature = legislatures.find { |l| query.all? { |k, v| l.__send__(k) == v } }
+      legislature = legislatures.find do |l|
+        query.all? { |k, v| l.__send__(k).to_s.downcase == v.to_s.downcase }
+      end
       fail Error, "Unknown legislature: #{query}" if legislature.nil?
       legislature
     end
