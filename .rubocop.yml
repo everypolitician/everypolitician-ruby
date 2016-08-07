@@ -51,5 +51,7 @@ Metrics/CyclomaticComplexity:
 Metrics/PerceivedComplexity:
   Max: 8
 
-
+Performance/Casecmp:
+  Enabled: false
+    
 inherit_from: .rubocop_todo.yml
