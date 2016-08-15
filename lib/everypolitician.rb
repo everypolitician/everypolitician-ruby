@@ -50,7 +50,7 @@ module Everypolitician
       country = Everypolitician.countries.find do |c|
         query.all? { |k, v| c[k].to_s.downcase == v.to_s.downcase }
       end
-      fail Error, "Couldn't find country for query: #{query}" if country.nil?
+      return if country.nil?
       new(country)
     end
 
@@ -74,7 +74,7 @@ module Everypolitician
       legislature = legislatures.find do |l|
         query.all? { |k, v| l.__send__(k).to_s.downcase == v.to_s.downcase }
       end
-      fail Error, "Unknown legislature: #{query}" if legislature.nil?
+      return if legislature.nil?
       legislature
     end
   end
@@ -91,7 +91,8 @@ module Everypolitician
     attr_reader :popolo_url
 
     def self.find(country_slug, legislature_slug)
-      Country.find(country_slug).legislature(legislature_slug)
+      country = Country.find(country_slug)
+      country && country.legislature(legislature_slug)
     end
 
     def initialize(legislature_data, country)
