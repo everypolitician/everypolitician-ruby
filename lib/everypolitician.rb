@@ -5,8 +5,6 @@ require 'everypolitician/popolo'
 require 'csv'
 
 module Everypolitician
-  class Error < StandardError; end
-
   class << self
     attr_writer :countries_json
     attr_writer :countries
