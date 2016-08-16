@@ -21,6 +21,12 @@ class EverypoliticianTest < Minitest::Test
     end
   end
 
+  def test_country_find_returns_nil_for_missing_countries
+    VCR.use_cassette('countries_json') do
+      assert_nil Everypolitician::Country.find('Narnia')
+    end
+  end
+
   def test_finds_country_by_hash_pair
     VCR.use_cassette('countries_json') do
       country = Everypolitician::Country.find(slug: 'Australia')
@@ -41,6 +47,18 @@ class EverypoliticianTest < Minitest::Test
       assert_equal 'Senate', legislature.name
       assert %r{#{CDN}/everypolitician/everypolitician-data/\w+?/data/Australia/Senate/ep-popolo-v1.0.json}.match(legislature.popolo_url)
       assert legislature.legislative_periods.is_a?(Array)
+    end
+  end
+
+  def test_legislature_find_returns_nil_for_missing_legislatures
+    VCR.use_cassette('countries_json') do
+      assert_nil Everypolitician::Legislature.find('Narnia', 'Aslan')
+    end
+  end
+
+  def test_legislature_find_returns_nil_for_known_country_unknown_legislature
+    VCR.use_cassette('countries_json') do
+      assert_nil Everypolitician::Legislature.find('Australia', 'ThisIsNotAHouse')
     end
   end
 
@@ -88,19 +106,6 @@ class EverypoliticianTest < Minitest::Test
       assert_equal 'Australia', legislature.country.name
       assert_equal 'AU', legislature.country.code
       assert_equal 'Senate', legislature.name
-    end
-  end
-
-  def test_raises_an_error_for_unknown_slugs
-    VCR.use_cassette('countries_json') do
-      assert_raises Everypolitician::Error do
-        Everypolitician.country('Foo')
-      end
-    end
-    VCR.use_cassette('countries_json') do
-      assert_raises Everypolitician::Error do
-        Everypolitician.legislature('Foo', 'Bar')
-      end
     end
   end
 
@@ -156,56 +161,6 @@ class EverypoliticianTest < Minitest::Test
     VCR.use_cassette('countries_json') do
       country = Everypolitician.country(code: 'AU')
       assert_equal 'Australia', country[:name]
-    end
-  end
-
-  def test_legislative_periods
-    VCR.use_cassette('countries_json') do
-      au_senate = Everypolitician.country(slug: 'Australia').legislature(slug: 'Senate')
-      lp = au_senate.legislative_periods.first
-      assert_equal 'term/44', lp.id
-      assert_equal '44th Parliament', lp.name
-      assert_equal Date.new(2013, 9, 7), lp.start_date
-      assert_equal '44', lp.slug
-      assert %r{https://raw.githubusercontent.com/everypolitician/everypolitician-data/\w+?/data/Australia/Senate/term-44.csv}.match(lp.csv_url)
-      assert_equal 'Senate', lp.legislature.name
-      assert_equal 'Australia', lp.country.name
-    end
-  end
-
-  def test_legislative_period_csv
-    VCR.use_cassette('term-44-csv') do
-      au_senate = Everypolitician.country(slug: 'Australia').legislature(slug: 'Senate')
-      lp = au_senate.legislative_periods.first
-      csv = lp.csv
-      assert_instance_of CSV::Table, csv
-    end
-  end
-
-  def test_legislative_period_square_brackets_expose_raw_data
-    VCR.use_cassette('countries_json') do
-      au_senate = Everypolitician.country(slug: 'Australia').legislature(slug: 'Senate')
-      lp = au_senate.legislative_periods.first
-      assert_equal 'term/44', lp[:id]
-      assert_equal '44th Parliament', lp[:name]
-      assert_equal '2013-09-07', lp[:start_date]
-      assert_equal 'data/Australia/Senate/term-44.csv', lp[:csv]
-    end
-  end
-
-  def test_legislative_period_end_date
-    VCR.use_cassette('countries_json') do
-      lp = Everypolitician.country(slug: 'Australia').legislature(slug: 'Representatives').legislative_periods[1]
-      assert_equal Date.new(2013, 9, 7), lp.end_date
-    end
-  end
-
-  def test_partial_dates
-    VCR.use_cassette('countries_json') do
-      af = Everypolitician.country(slug: 'Albania').legislature(slug: 'Assembly')
-      lp = af.legislative_periods.last
-      assert_equal Date.new(2009), lp.start_date
-      assert_equal Date.new(2013), lp.end_date
     end
   end
 
