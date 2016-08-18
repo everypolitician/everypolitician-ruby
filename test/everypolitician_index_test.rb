@@ -4,10 +4,8 @@ class EverypoliticianIndexTest < Minitest::Test
   def test_country
     VCR.use_cassette('countries_json') do
       index = Everypolitician::Index.new
-      australia = index.country('Australia')
-      assert_equal 'Australia', australia.name
-      assert_equal 'AU', australia.code
-      assert_equal 2, australia.legislatures.size
+      sweden = index.country('Sweden')
+      assert_equal 94_415, sweden.legislature('Riksdag').statement_count
     end
   end
 
