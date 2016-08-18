@@ -15,7 +15,7 @@ class EverypoliticianIndexTest < Minitest::Test
     VCR.use_cassette('countries_json@bc95a4a') do
       index = Everypolitician::Index.new('bc95a4a')
       sweden = index.country('Sweden')
-      assert_equal 96236, sweden.legislature('Riksdag').statement_count
+      assert_equal 96_236, sweden.legislature('Riksdag').statement_count
     end
   end
 end
