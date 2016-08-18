@@ -45,7 +45,7 @@ module Everypolitician
     end
 
     def country(slug)
-      country_index[slug]
+      country_index[slug.to_s.downcase]
     end
 
     def countries
@@ -59,7 +59,7 @@ module Everypolitician
     private
 
     def country_index
-      @country_index ||= Hash[countries.map { |c| [c.slug, c] }]
+      @country_index ||= Hash[countries.map { |c| [c.slug.downcase, c] }]
     end
 
     def countries_json

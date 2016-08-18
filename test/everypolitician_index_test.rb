@@ -17,6 +17,13 @@ class EverypoliticianIndexTest < Minitest::Test
     end
   end
 
+  def test_country_lowercase_slug
+    VCR.use_cassette('countries_json') do
+      index = Everypolitician::Index.new
+      refute_nil index.country('sweden')
+    end
+  end
+
   def test_countries
     VCR.use_cassette('countries_json') do
       index = Everypolitician::Index.new
