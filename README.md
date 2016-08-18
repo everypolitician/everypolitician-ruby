@@ -25,28 +25,29 @@ Use as shown below, passing the `:slug` of the country to the `country` method, 
 ```ruby
 require 'everypolitician'
 
-australia = Everypolitician.country('Australia')
+australia = Everypolitician::Index.new.country('Australia')
 australia.code # => "AU"
 senate = australia.legislature('Senate')
 senate.popolo # => #<Everypolitician::Popolo::JSON>
 
-united_kingdom = Everypolitician.country('UK')
+united_kingdom = Everypolitician::Index.new.country('UK')
 house_of_commons = united_kingdom.legislature('Commons')
 
-american_samoa = Everypolitician.country('American-Samoa')
+american_samoa = Everypolitician::Index.new.country('American-Samoa')
 house_of_representatives = american_samoa.legislature('House')
 
-united_arab_emirates = Everypolitician.country('United-Arab-Emirates')
+united_arab_emirates = Everypolitician::Index.new.country('United-Arab-Emirates')
 national_council = united_arab_emirates.legislature('Federal-National-Council')
 
-algeria = Everypolitician.country('Algeria')
+algeria = Everypolitician::Index.new.country('Algeria')
 national_assembly = algeria.legislature('Majlis')
 ```
 
-If you want to point at a different `countries.json`, e.g. a local path or a different url, you can set it like this:
+If you want to point at a different version of `countries.json` you can supply an
+`index_url` option to `Everypolitician::Index.new`.
 
 ```ruby
-Everypolitician.countries_json = 'path/to/local/countries.json'
+Everypolitician::Index.new(index_url: 'https://cdn.rawgit.com/everypolitician/everypolitician-data/080cb46/countries.json')
 ```
 
 ## Development
