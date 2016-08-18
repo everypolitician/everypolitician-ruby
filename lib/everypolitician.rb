@@ -48,18 +48,18 @@ module Everypolitician
       country_index[slug]
     end
 
-    private
-
-    def country_index
-      @country_index ||= Hash[countries.map { |c| [c.slug, c] }]
-    end
-
     def countries
       @countries ||= begin
         JSON.parse(open(countries_json).read, symbolize_names: true).map do |c|
           Country.new(c)
         end
       end
+    end
+
+    private
+
+    def country_index
+      @country_index ||= Hash[countries.map { |c| [c.slug, c] }]
     end
 
     def countries_json

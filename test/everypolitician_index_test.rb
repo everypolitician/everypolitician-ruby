@@ -16,4 +16,11 @@ class EverypoliticianIndexTest < Minitest::Test
       assert_equal 96_236, sweden.legislature('Riksdag').statement_count
     end
   end
+
+  def test_countries
+    VCR.use_cassette('countries_json') do
+      index = Everypolitician::Index.new
+      assert_equal 233, index.countries.size
+    end
+  end
 end
