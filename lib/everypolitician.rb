@@ -37,6 +37,37 @@ module Everypolitician
     [country, legislature]
   end
 
+  class Index
+    attr_reader :ref
+
+    def initialize(ref = 'master')
+      @ref = ref
+    end
+
+    def country(slug)
+      country_index[slug]
+    end
+
+    private
+
+    def country_index
+      @country_index ||= Hash[countries.map { |c| [c.slug, c] }]
+    end
+
+    def countries
+      @countries ||= begin
+        JSON.parse(open(countries_json).read, symbolize_names: true).map do |c|
+          Country.new(c)
+        end
+      end
+    end
+
+    def countries_json
+      @countries_json ||= 'https://raw.githubusercontent.com/' \
+        "everypolitician/everypolitician-data/#{ref}/countries.json"
+    end
+  end
+
   class Country
     attr_reader :name
     attr_reader :code
