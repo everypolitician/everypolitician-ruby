@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## [0.13.0] - 2016-08-18
+
 ### Added
 
 - There is now an `Everypolitician::Index` class which can be instantiated with
@@ -121,3 +123,4 @@ a string with the time in seconds.
 [0.10.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.9.0...v0.10.0
 [0.11.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.10.0...v0.11.0
 [0.12.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.11.0...v0.12.0
+[0.13.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.12.0...v0.13.0
