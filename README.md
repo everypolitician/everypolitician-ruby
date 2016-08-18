@@ -41,6 +41,11 @@ national_council = united_arab_emirates.legislature('Federal-National-Council')
 
 algeria = Everypolitician::Index.new.country('Algeria')
 national_assembly = algeria.legislature('Majlis')
+
+# Iterate though all known countries
+Everypolitician::Index.new.countries do |country|
+  puts "#{country.name} has #{country.legislatures.size} legislatures"
+end
 ```
 
 If you want to point at a different version of `countries.json` you can supply an
