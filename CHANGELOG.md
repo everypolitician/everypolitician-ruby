@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+
+### Added
+
+- There is now an `Everypolitician::Index` class which can be instantiated with a custom SHA/ref, rather than having to globally set the ref via `Everypolitician.countries_json=`.
+  - You can access a country via the `Everypolitician::Index#country` method, which takes a (case-insensitive) slug for the country.
+  - You can get a list of all countries via the `Everypolitician::Index#countries` method.
+
 ## [0.12.0] - 2016-08-16
 
 ### Changed
