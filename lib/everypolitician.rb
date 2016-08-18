@@ -38,10 +38,13 @@ module Everypolitician
   end
 
   class Index
-    attr_reader :ref
+    DEFAULT_INDEX_URL = 'https://raw.githubusercontent.com/' \
+      'everypolitician/everypolitician-data/master/countries.json'.freeze
 
-    def initialize(ref = 'master')
-      @ref = ref
+    attr_reader :index_url
+
+    def initialize(index_url: DEFAULT_INDEX_URL)
+      @index_url = index_url
     end
 
     def country(slug)
@@ -50,7 +53,7 @@ module Everypolitician
 
     def countries
       @countries ||= begin
-        JSON.parse(open(countries_json).read, symbolize_names: true).map do |c|
+        JSON.parse(open(index_url).read, symbolize_names: true).map do |c|
           Country.new(c)
         end
       end
@@ -60,11 +63,6 @@ module Everypolitician
 
     def country_index
       @country_index ||= Hash[countries.map { |c| [c.slug.downcase, c] }]
-    end
-
-    def countries_json
-      @countries_json ||= 'https://raw.githubusercontent.com/' \
-        "everypolitician/everypolitician-data/#{ref}/countries.json"
     end
   end
 
