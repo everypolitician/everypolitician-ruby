@@ -132,6 +132,10 @@ module Everypolitician
       @country = country
     end
 
+    def [](key)
+      raw_data[key]
+    end
+
     def popolo
       @popolo ||= Everypolitician::Popolo.parse(open(popolo_url).read)
     end

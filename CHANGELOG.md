@@ -5,6 +5,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+
+## [0.14.0] - 2016-08-22
+
+### Added
+
+- A Legislature now has `[]` defined, for symmetry with Country and 
+  LegislativePeriod
+
 ## [0.13.0] - 2016-08-18
 
 ### Added
@@ -82,7 +90,7 @@ a string with the time in seconds.
 
 - We no longer use ruby metaprogramming to define the methods on `Country` and `Legislature`, they are now explicitly defined as properties and methods.
 - `Legislature#popolo_url` now uses the `Legislature#sha` method rather than `master` in the raw url.
-- `countries.json` is only loaded once, when it's first accessed. If you want to force a refetch then you can call `Everypolitician.countries = nil`.
+- `countries.json` is only loaded once, when it’s first accessed. If you want to force a refetch then you can call `Everypolitician.countries = nil`.
 
 ## [0.4.0] - 2016-01-26
 
@@ -124,3 +132,4 @@ a string with the time in seconds.
 [0.11.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.10.0...v0.11.0
 [0.12.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.11.0...v0.12.0
 [0.13.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.12.0...v0.13.0
+[0.14.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.13.0...v0.14.0
