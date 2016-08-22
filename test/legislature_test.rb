@@ -61,4 +61,11 @@ class EverypoliticianTest < Minitest::Test
       assert_equal 'Senate', senate.name
     end
   end
+
+  def test_accessing_properties_with_square_brackets
+    VCR.use_cassette('countries_json') do
+      legislature = Everypolitician::Legislature.find('UK', 'commons')
+      assert_equal 'House of Commons', legislature[:name]
+    end
+  end
 end
