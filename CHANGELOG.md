@@ -6,6 +6,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 
 
+## [0.15.0] - 2016-08-23
+
+### Fixed
+
+- Calling `start_date` or `end_date` on a Legislature which doesn’t have
+  one now returns `nil` rather than raising an Exception.
+
 ## [0.14.0] - 2016-08-22
 
 ### Added
@@ -133,3 +140,4 @@ a string with the time in seconds.
 [0.12.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.11.0...v0.12.0
 [0.13.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.12.0...v0.13.0
 [0.14.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.13.0...v0.14.0
+[0.15.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.14.0...v0.15.0
