@@ -47,6 +47,13 @@ class EverypoliticianTest < Minitest::Test
     end
   end
 
+  def test_missing_legislative_period_end_date
+    VCR.use_cassette('countries_json') do
+      lp = Everypolitician.country(slug: 'Australia').legislature(slug: 'Representatives').legislative_periods.first
+      assert_nil lp.end_date
+    end
+  end
+
   def test_partial_dates
     VCR.use_cassette('countries_json') do
       af = Everypolitician.country(slug: 'Albania').legislature(slug: 'Assembly')
