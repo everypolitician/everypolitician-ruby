@@ -23,7 +23,7 @@ class EverypoliticianTest < Minitest::Test
     VCR.use_cassette('countries_json') do
       au_senate = Everypolitician.country(slug: 'Australia').legislature(slug: 'Senate')
       term = au_senate.legislative_periods.first
-      assert_includes term.csv_url, 'https://raw.githubusercontent.com/everypolitician/everypolitician-data/'
+      assert_includes term.csv_url, 'https://cdn.rawgit.com/everypolitician/everypolitician-data/'
       assert_includes term.csv_url, '/data/Australia/Senate/term-44.csv'
     end
   end
