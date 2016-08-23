@@ -167,11 +167,13 @@ module Everypolitician
     attr_reader :legislature
     attr_reader :country
     attr_reader :raw_data
+    attr_reader :csv_url
 
     def initialize(legislative_period_data, legislature, country)
       @id = legislative_period_data[:id]
       @name = legislative_period_data[:name]
       @slug = legislative_period_data[:slug]
+      @csv_url = legislative_period_data[:csv_url]
       @legislature = legislature
       @country = country
       @raw_data = legislative_period_data
@@ -183,11 +185,6 @@ module Everypolitician
 
     def end_date
       @end_date ||= parse_partial_date(raw_data[:end_date])
-    end
-
-    def csv_url
-      @csv_url ||= 'https://raw.githubusercontent.com/everypolitician' \
-        "/everypolitician-data/#{legislature.sha}/#{raw_data[:csv]}"
     end
 
     def csv
