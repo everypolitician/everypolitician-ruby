@@ -14,7 +14,8 @@ class EverypoliticianTest < Minitest::Test
       assert_equal '44th Parliament', term.name
       assert_equal Date.new(2013, 9, 7), term.start_date
       assert_equal '44', term.slug
-      assert %r{https://raw.githubusercontent.com/everypolitician/everypolitician-data/\w+?/data/Australia/Senate/term-44.csv}.match(term.csv_url)
+      assert_includes term.csv_url, 'https://raw.githubusercontent.com/everypolitician/everypolitician-data/'
+      assert_includes term.csv_url, '/data/Australia/Senate/term-44.csv'
       assert_equal 'Senate', term.legislature.name
       assert_equal 'Australia', term.country.name
     end
