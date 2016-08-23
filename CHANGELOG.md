@@ -6,12 +6,21 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 
 
+
+## [0.16.0] - 2016-08-22
+
+### Added
+
+- Added `csv_url` to Legislature class. Returns full url of `names.csv` file. For example: `https://cdn.rawgit.com/everypolitician/everypolitician-data/ba976cf/data/UK/Commons/<names class="csv"></names>`
+
+
 ## [0.15.0] - 2016-08-23
 
 ### Fixed
 
 - Calling `start_date` or `end_date` on a Legislature which doesn’t have
   one now returns `nil` rather than raising an Exception.
+
 
 ## [0.14.0] - 2016-08-22
 
