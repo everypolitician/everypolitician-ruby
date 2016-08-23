@@ -3,6 +3,7 @@ require 'everypolitician'
 
 require 'minitest/autorun'
 require 'vcr'
+require 'pry'
 
 VCR.configure do |config|
   config.cassette_library_dir = 'test/fixtures/vcr_cassettes'
