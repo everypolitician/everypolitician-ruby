@@ -6,12 +6,20 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 
 
+
+## [0.16.0] - 2016-08-22
+
+### Added
+
+- Added `csv_url` to Legislature class. Returns full url of `names.csv` file. For example: `https://cdn.rawgit.com/everypolitician/everypolitician-data/ba976cf/data/UK/Commons/names.csv`
+
 ## [0.15.0] - 2016-08-23
 
 ### Fixed
 
 - Calling `start_date` or `end_date` on a Legislature which doesn’t have
   one now returns `nil` rather than raising an Exception.
+
 
 ## [0.14.0] - 2016-08-22
 
@@ -141,3 +149,4 @@ a string with the time in seconds.
 [0.13.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.12.0...v0.13.0
 [0.14.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.13.0...v0.14.0
 [0.15.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.14.0...v0.15.0
+[0.16.0]: https://https://github.com/everypolitician/everypolitician-ruby/compare/v0.15.0...v0.16.0

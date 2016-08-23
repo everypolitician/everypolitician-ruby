@@ -68,4 +68,14 @@ class EverypoliticianTest < Minitest::Test
       assert_equal 'House of Commons', legislature[:name]
     end
   end
+
+  def test_csv_url_method
+    VCR.use_cassette('countries_json') do
+      legislature = Everypolitician::Legislature.find('UK', 'commons')
+      base = 'https://cdn.rawgit.com/everypolitician/everypolitician-data/'
+      sha = legislature.sha
+      path = '/data/UK/Commons/names.csv'
+      assert_equal legislature.csv_url, "#{base}#{sha}#{path}"
+    end
+  end
 end
