@@ -68,4 +68,11 @@ class EverypoliticianTest < Minitest::Test
       assert_equal 'House of Commons', legislature[:name]
     end
   end
+
+  def test_names_method
+    VCR.use_cassette('countries_json') do
+      legislature = Everypolitician::Legislature.find('UK', 'commons')
+      assert_equal 'data/UK/Commons/names.csv', legislature.names_path
+    end
+  end
 end

@@ -158,6 +158,10 @@ module Everypolitician
     def lastmod
       Time.at(lastmod_str.to_i).gmtime
     end
+
+    def names_path
+      @raw_data[:names]
+    end
   end
 
   class LegislativePeriod
