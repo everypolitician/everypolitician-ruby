@@ -201,6 +201,7 @@ module Everypolitician
     private
 
     def parse_partial_date(date)
+      return if date.to_s.empty?
       Date.new(*date.split('-').map(&:to_i))
     end
   end
