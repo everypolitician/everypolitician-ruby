@@ -5,7 +5,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## [0.17.0] - 2016-08-23
 
+### Changed
+
+- The code now uses the `csv_url` field from the data, so the url
+  host has changed from `raw.githubusercontent.com` to `cdn.rawgit.com`.
 
 ## [0.16.0] - 2016-08-22
 
@@ -150,3 +155,4 @@ a string with the time in seconds.
 [0.14.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.13.0...v0.14.0
 [0.15.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.14.0...v0.15.0
 [0.16.0]: https://https://github.com/everypolitician/everypolitician-ruby/compare/v0.15.0...v0.16.0
+[0.17.0]: https://https://github.com/everypolitician/everypolitician-ruby/compare/v0.16.0...v0.17.0
