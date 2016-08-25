@@ -5,6 +5,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## [0.18.0] - 2016-08-25
+
+### Changed
+
+- The method to get the URL of the names file is now `Legislature.names_url`, 
+   not `Legislature.csv_url`
+
 ## [0.17.0] - 2016-08-23
 
 ### Changed
@@ -156,3 +163,4 @@ a string with the time in seconds.
 [0.15.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.14.0...v0.15.0
 [0.16.0]: https://https://github.com/everypolitician/everypolitician-ruby/compare/v0.15.0...v0.16.0
 [0.17.0]: https://https://github.com/everypolitician/everypolitician-ruby/compare/v0.16.0...v0.17.0
+[0.18.0]: https://https://github.com/everypolitician/everypolitician-ruby/compare/v0.17.0...v0.18.0
