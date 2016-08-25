@@ -159,9 +159,9 @@ module Everypolitician
       Time.at(lastmod_str.to_i).gmtime
     end
 
-    def csv_url
-      @csv_url ||= 'https://cdn.rawgit.com/everypolitician' \
-        "/everypolitician-data/#{@sha}/#{raw_data[:names]}"
+    def names_url
+      'https://cdn.rawgit.com/everypolitician/everypolitician-data/%s/%s' %
+        [sha, raw_data[:names]]
     end
   end
 

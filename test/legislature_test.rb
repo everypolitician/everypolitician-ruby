@@ -75,7 +75,7 @@ class EverypoliticianTest < Minitest::Test
       base = 'https://cdn.rawgit.com/everypolitician/everypolitician-data/'
       sha = legislature.sha
       path = '/data/UK/Commons/names.csv'
-      assert_equal legislature.csv_url, "#{base}#{sha}#{path}"
+      assert_equal legislature.names_url, URI.join(base, sha + path).to_s
     end
   end
 end
