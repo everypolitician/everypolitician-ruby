@@ -27,22 +27,27 @@ Examples:
 ```ruby
 require 'everypolitician'
 
-australia = Everypolitician.country('Australia')
+australia = Everypolitician::Index.new.country('Australia')
 australia.code # => "AU"
 senate = australia.legislature('Senate')
 senate.popolo # => #<Everypolitician::Popolo::JSON>
 
-united_kingdom = Everypolitician.country('UK')
+united_kingdom = Everypolitician::Index.new.country('UK')
 house_of_commons = united_kingdom.legislature('Commons')
 
-american_samoa = Everypolitician.country('American-Samoa')
+american_samoa = Everypolitician::Index.new.country('American-Samoa')
 house_of_representatives = american_samoa.legislature('House')
 
-united_arab_emirates = Everypolitician.country('United-Arab-Emirates')
+united_arab_emirates = Everypolitician::Index.new.country('United-Arab-Emirates')
 national_council = united_arab_emirates.legislature('Federal-National-Council')
 
-algeria = Everypolitician.country('Algeria')
+algeria = Everypolitician::Index.new.country('Algeria')
 national_assembly = algeria.legislature('Majlis')
+
+# Iterate though all known countries
+Everypolitician::Index.new.countries do |country|
+  puts "#{country.name} has #{country.legislatures.size} legislature(s)"
+end
 ```
 
 By default, the gem connects to EveryPolitician's data on GitHub over HTTPS and
@@ -50,13 +55,14 @@ returns the most recent data. Specifically it uses the current index file,
 called `countries.json`, which itself contains links to specific versions of
 data files.
 
-If you want to point at a different `countries.json`, such as one you've
-already downloaded, you can override this default behavour by setting it like
-this:
+If you want to point at a different `countries.json`, you can override this default behavour by supplying an
+`index_url` option to `Everypolitician::Index.new` like this:
 
 ```ruby
-Everypolitician.countries_json = 'path/to/local/countries.json'
+Everypolitician::Index.new(index_url: 'https://cdn.rawgit.com/everypolitician/everypolitician-data/080cb46/countries.json')
 ```
+
+The example above is using a specific commit (indicated by the hash `080cb46`).
 
 For more about `countries.json`, see [this description](http://docs.everypolitician.org/repo_structure.html).
 

@@ -1,3 +1,3 @@
 module Everypolitician
-  VERSION = '0.12.0'.freeze
+  VERSION = '0.18.0'.freeze
 end

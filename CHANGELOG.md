@@ -3,6 +3,53 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+
+## [0.18.0] - 2016-08-25
+
+### Changed
+
+- The method to get the URL of the names file is now `Legislature.names_url`, 
+   not `Legislature.csv_url`
+
+## [0.17.0] - 2016-08-23
+
+### Changed
+
+- The code now uses the `csv_url` field from the data, so the url
+  host has changed from `raw.githubusercontent.com` to `cdn.rawgit.com`.
+
+## [0.16.0] - 2016-08-22
+
+### Added
+
+- Added `csv_url` to Legislature class. Returns full url of `names.csv` file. For example: `https://cdn.rawgit.com/everypolitician/everypolitician-data/ba976cf/data/UK/Commons/names.csv`
+
+## [0.15.0] - 2016-08-23
+
+### Fixed
+
+- Calling `start_date` or `end_date` on a Legislature which doesn’t have
+  one now returns `nil` rather than raising an Exception.
+
+
+## [0.14.0] - 2016-08-22
+
+### Added
+
+- A Legislature now has `[]` defined, for symmetry with Country and 
+  LegislativePeriod
+
+## [0.13.0] - 2016-08-18
+
+### Added
+
+- There is now an `Everypolitician::Index` class which can be instantiated with
+  a url pointing to a `countries.json` file. This replaces the need to globally
+  set a url via `Everypolitician.countries_json=`.
+  - You can access a country via the `Everypolitician::Index#country` method, which takes a (case-insensitive) slug for the country.
+  - You can get a list of all countries via the `Everypolitician::Index#countries` method.
+
 ## [0.12.0] - 2016-08-16
 
 ### Changed
@@ -70,7 +117,7 @@ a string with the time in seconds.
 
 - We no longer use ruby metaprogramming to define the methods on `Country` and `Legislature`, they are now explicitly defined as properties and methods.
 - `Legislature#popolo_url` now uses the `Legislature#sha` method rather than `master` in the raw url.
-- `countries.json` is only loaded once, when it's first accessed. If you want to force a refetch then you can call `Everypolitician.countries = nil`.
+- `countries.json` is only loaded once, when it’s first accessed. If you want to force a refetch then you can call `Everypolitician.countries = nil`.
 
 ## [0.4.0] - 2016-01-26
 
@@ -111,3 +158,9 @@ a string with the time in seconds.
 [0.10.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.9.0...v0.10.0
 [0.11.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.10.0...v0.11.0
 [0.12.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.11.0...v0.12.0
+[0.13.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.12.0...v0.13.0
+[0.14.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.13.0...v0.14.0
+[0.15.0]: https://github.com/everypolitician/everypolitician-ruby/compare/v0.14.0...v0.15.0
+[0.16.0]: https://https://github.com/everypolitician/everypolitician-ruby/compare/v0.15.0...v0.16.0
+[0.17.0]: https://https://github.com/everypolitician/everypolitician-ruby/compare/v0.16.0...v0.17.0
+[0.18.0]: https://https://github.com/everypolitician/everypolitician-ruby/compare/v0.17.0...v0.18.0

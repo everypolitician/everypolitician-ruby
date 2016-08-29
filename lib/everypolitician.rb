@@ -37,6 +37,35 @@ module Everypolitician
     [country, legislature]
   end
 
+  class Index
+    DEFAULT_INDEX_URL = 'https://raw.githubusercontent.com/' \
+      'everypolitician/everypolitician-data/master/countries.json'.freeze
+
+    attr_reader :index_url
+
+    def initialize(index_url: DEFAULT_INDEX_URL)
+      @index_url = index_url
+    end
+
+    def country(slug)
+      country_index[slug.to_s.downcase]
+    end
+
+    def countries
+      @countries ||= begin
+        JSON.parse(open(index_url).read, symbolize_names: true).map do |c|
+          Country.new(c)
+        end
+      end
+    end
+
+    private
+
+    def country_index
+      @country_index ||= Hash[countries.map { |c| [c.slug.downcase, c] }]
+    end
+  end
+
   class Country
     attr_reader :name
     attr_reader :code
@@ -103,6 +132,10 @@ module Everypolitician
       @country = country
     end
 
+    def [](key)
+      raw_data[key]
+    end
+
     def popolo
       @popolo ||= Everypolitician::Popolo.parse(open(popolo_url).read)
     end
@@ -125,6 +158,11 @@ module Everypolitician
     def lastmod
       Time.at(lastmod_str.to_i).gmtime
     end
+
+    def names_url
+      'https://cdn.rawgit.com/everypolitician/everypolitician-data/%s/%s' %
+        [sha, raw_data[:names]]
+    end
   end
 
   class LegislativePeriod
@@ -134,11 +172,13 @@ module Everypolitician
     attr_reader :legislature
     attr_reader :country
     attr_reader :raw_data
+    attr_reader :csv_url
 
     def initialize(legislative_period_data, legislature, country)
       @id = legislative_period_data[:id]
       @name = legislative_period_data[:name]
       @slug = legislative_period_data[:slug]
+      @csv_url = legislative_period_data[:csv_url]
       @legislature = legislature
       @country = country
       @raw_data = legislative_period_data
@@ -152,11 +192,6 @@ module Everypolitician
       @end_date ||= parse_partial_date(raw_data[:end_date])
     end
 
-    def csv_url
-      @csv_url ||= 'https://raw.githubusercontent.com/everypolitician' \
-        "/everypolitician-data/#{legislature.sha}/#{raw_data[:csv]}"
-    end
-
     def csv
       CSV.parse(open(csv_url).read, headers: true, header_converters: :symbol, converters: nil)
     end
@@ -168,6 +203,7 @@ module Everypolitician
     private
 
     def parse_partial_date(date)
+      return if date.to_s.empty?
       Date.new(*date.split('-').map(&:to_i))
     end
   end
