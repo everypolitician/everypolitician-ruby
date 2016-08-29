@@ -63,6 +63,7 @@ Everypolitician::Index.new(index_url: 'https://cdn.rawgit.com/everypolitician/ev
 ```
 
 The example above is using a specific commit (indicated by the hash `080cb46`).
+If you want to use a local copy of `countries.json` you can specify a local file path as the `index_url` instead of a fully-qualified URL.
 
 For more about `countries.json`, see [this description](http://docs.everypolitician.org/repo_structure.html).
 
