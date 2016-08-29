@@ -60,11 +60,8 @@ Everypolitician.countries_json = 'path/to/local/countries.json'
 
 For more about `countries.json`, see [this description](http://localhost:4000/repo_structure.html).
 
-The data the gem provides is identical to that in the equivalent Popolo JSON
-file. You can download the JSON directly (from
-[everypolitician.org](http://everypolitician.org/), for example). Remember that
-EveryPolitician data is frequently updated — see this information about
-[using EveryPolitician data](http://docs.everypolitician.org/use_the_data.html).
+Remember that EveryPolitician data is frequently updated — see this information
+about [using EveryPolitician data](http://docs.everypolitician.org/use_the_data.html).
 
 More information on [the EveryPolitician site](http://docs.everypolitician.org/).
 
