@@ -58,7 +58,7 @@ this:
 Everypolitician.countries_json = 'path/to/local/countries.json'
 ```
 
-For more about `countries.json`, see [this description](http://localhost:4000/repo_structure.html).
+For more about `countries.json`, see [this description](http://docs.everypolitician.org/repo_structure.html).
 
 Remember that EveryPolitician data is frequently updated — see this information
 about [using EveryPolitician data](http://docs.everypolitician.org/use_the_data.html).
