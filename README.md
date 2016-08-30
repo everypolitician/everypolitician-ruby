@@ -1,6 +1,6 @@
 # Everypolitician [![Build Status](https://travis-ci.org/everypolitician/everypolitician-ruby.svg?branch=v0.1.0)](https://travis-ci.org/everypolitician/everypolitician-ruby) [![Gem Version](https://badge.fury.io/rb/everypolitician.svg)](https://badge.fury.io/rb/everypolitician)
 
-Interface with EveryPolitician data from your Ruby application.
+Interface with [EveryPolitician](http://everypolitician.org) data from your Ruby application.
 
 ## Installation
 
@@ -20,7 +20,9 @@ Or install it yourself as:
 
 ## Usage
 
-Use as shown below, passing the `:slug` of the country to the `country` method, and the `:slug` of the legislature to the `legislature` method. Examples:
+Pass the `:slug` of the country to the `country` method, and the `:slug` of the legislature to the `legislature` method.
+
+Examples:
 
 ```ruby
 require 'everypolitician'
@@ -48,12 +50,27 @@ Everypolitician::Index.new.countries do |country|
 end
 ```
 
-If you want to point at a different version of `countries.json` you can supply an
-`index_url` option to `Everypolitician::Index.new`.
+By default, the gem connects to EveryPolitician's data on GitHub over HTTPS and
+returns the most recent data. Specifically it uses the current index file,
+called `countries.json`, which itself contains links to specific versions of
+data files.
+
+If you want to point at a different `countries.json`, you can override this default behavour by supplying an
+`index_url` option to `Everypolitician::Index.new` like this:
 
 ```ruby
 Everypolitician::Index.new(index_url: 'https://cdn.rawgit.com/everypolitician/everypolitician-data/080cb46/countries.json')
 ```
+
+The example above is using a specific commit (indicated by the hash `080cb46`).
+If you want to use a local copy of `countries.json` you can specify a local file path as the `index_url` instead of a fully-qualified URL.
+
+For more about `countries.json`, see [this description](http://docs.everypolitician.org/repo_structure.html).
+
+Remember that EveryPolitician data is frequently updated — see this information
+about [using EveryPolitician data](http://docs.everypolitician.org/use_the_data.html).
+
+More information on [the EveryPolitician site](http://docs.everypolitician.org/).
 
 ## Development
 
