@@ -48,6 +48,11 @@ national_assembly = algeria.legislature('Majlis')
 Everypolitician::Index.new.countries.each do |country|
   puts "#{country.name} has #{country.legislatures.size} legislature(s)"
 end
+
+# Iterate through all known legislatures
+Everypolitician::Index.new.all_legislatures.each do |legislature|
+  puts "#{legislature.name} in #{legislature.country.name} has #{legislature.person_count} member(s)"
+end
 ```
 
 By default, the gem connects to EveryPolitician's data on GitHub over HTTPS and
