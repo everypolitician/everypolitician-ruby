@@ -78,4 +78,24 @@ class EverypoliticianTest < Minitest::Test
       assert_equal legislature.names_url, URI.join(base, sha + path).to_s
     end
   end
+
+  def test_upper_house_method
+    VCR.use_cassette('countries_json') do
+      bicameral = Everypolitician.country(code: 'CM')
+      assert_equal 'Sénat', bicameral.upper_house.name
+      unicameral = Everypolitician.country(code: 'GG-ALD')
+      assert_equal 'States', unicameral.upper_house.name
+    end
+  end
+
+  def test_lower_house_method
+    VCR.use_cassette('countries_json') do
+      bicameral = Everypolitician.country(code: 'CM')
+      assert_equal 'Assemblée Nationale', bicameral.lower_house.name
+      unicameral = Everypolitician.country(code: 'GG-ALD')
+      assert_equal 'States', unicameral.lower_house.name
+      two_lower_houses = Everypolitician.country(code: 'VG')
+      assert_equal 'House of Assembly', two_lower_houses.lower_house.name
+    end
+  end
 end
