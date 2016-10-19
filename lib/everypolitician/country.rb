@@ -35,5 +35,21 @@ module Everypolitician
         query.all? { |k, v| l.__send__(k).to_s.downcase == v.to_s.downcase }
       end
     end
+
+    def upper_house
+      @upper_house ||= get_house('upper house')
+    end
+
+    def lower_house
+      @lower_house ||= get_house('lower house')
+    end
+
+    private
+
+    def get_house(type)
+      houses = legislatures.select { |l| l.type == type || l.type == 'unicameral legislature' }
+      return houses.first if houses.count == 1
+      houses.sort_by { |h| h.legislative_periods.max_by { |l| l[:start_date] }[:start_date] }.last
+    end
   end
 end
