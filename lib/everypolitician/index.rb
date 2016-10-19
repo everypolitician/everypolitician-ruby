@@ -24,6 +24,10 @@ module Everypolitician
       end
     end
 
+    def all_legislatures
+      @all_legislatures ||= countries.flat_map(&:legislatures)
+    end
+
     private
 
     def country_index
