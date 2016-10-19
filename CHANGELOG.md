@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+### Added
+
+- Added `all_legislatures` to Index class. Returns an array of all the
+  Legislatures for all countries.
+
+## [0.19.0] - 2016-10-19
+
 ## Unreleased
 
 ## [0.18.0] - 2016-08-25

@@ -32,4 +32,13 @@ class EverypoliticianIndexTest < Minitest::Test
       assert_equal 233, index.countries.size
     end
   end
+
+  def test_all_legislatures
+    VCR.use_cassette('countries_json') do
+      all = Everypolitician::Index.new.all_legislatures
+      assert_equal 243, all.count
+      assert_equal 'People\'s Assembly', all.first.name
+      assert_equal 'Lagting', all.last.name
+    end
+  end
 end

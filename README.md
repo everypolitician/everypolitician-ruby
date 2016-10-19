@@ -45,8 +45,13 @@ algeria = Everypolitician::Index.new.country('Algeria')
 national_assembly = algeria.legislature('Majlis')
 
 # Iterate though all known countries
-Everypolitician::Index.new.countries do |country|
+Everypolitician::Index.new.countries.each do |country|
   puts "#{country.name} has #{country.legislatures.size} legislature(s)"
+end
+
+# Iterate through all known legislatures
+Everypolitician::Index.new.all_legislatures.each do |legislature|
+  puts "#{legislature.name} in #{legislature.country.name} has #{legislature.person_count} member(s)"
 end
 ```
 
