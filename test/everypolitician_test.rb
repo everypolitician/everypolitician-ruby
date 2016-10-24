@@ -113,7 +113,7 @@ class EverypoliticianTest < Minitest::Test
   def test_expose_the_statement_count_of_a_legislature
     VCR.use_cassette('countries_json') do
       uganda_parliament = Everypolitician.country(slug: 'Uganda').legislature(slug: 'Parliament')
-      assert_equal 18_031, uganda_parliament.statement_count
+      assert_equal 18_921, uganda_parliament.statement_count
     end
   end
 

@@ -10,10 +10,10 @@ class EverypoliticianTest < Minitest::Test
     VCR.use_cassette('countries_json') do
       au_senate = Everypolitician.country(slug: 'Australia').legislature(slug: 'Senate')
       term = au_senate.legislative_periods.first
-      assert_equal 'term/44', term.id
-      assert_equal '44th Parliament', term.name
-      assert_equal Date.new(2013, 9, 7), term.start_date
-      assert_equal '44', term.slug
+      assert_equal 'term/45', term.id
+      assert_equal '45th Parliament', term.name
+      assert_equal Date.new(2016, 7, 2), term.start_date
+      assert_equal '45', term.slug
       assert_equal 'Senate', term.legislature.name
       assert_equal 'Australia', term.country.name
     end
@@ -24,7 +24,7 @@ class EverypoliticianTest < Minitest::Test
       au_senate = Everypolitician.country(slug: 'Australia').legislature(slug: 'Senate')
       term = au_senate.legislative_periods.first
       assert_includes term.csv_url, 'https://cdn.rawgit.com/everypolitician/everypolitician-data/'
-      assert_includes term.csv_url, '/data/Australia/Senate/term-44.csv'
+      assert_includes term.csv_url, '/data/Australia/Senate/term-45.csv'
     end
   end
 
@@ -41,17 +41,17 @@ class EverypoliticianTest < Minitest::Test
     VCR.use_cassette('countries_json') do
       au_senate = Everypolitician.country(slug: 'Australia').legislature(slug: 'Senate')
       term = au_senate.legislative_periods.first
-      assert_equal 'term/44', term[:id]
-      assert_equal '44th Parliament', term[:name]
-      assert_equal '2013-09-07', term[:start_date]
-      assert_equal 'data/Australia/Senate/term-44.csv', term[:csv]
+      assert_equal 'term/45', term[:id]
+      assert_equal '45th Parliament', term[:name]
+      assert_equal '2016-07-02', term[:start_date]
+      assert_equal 'data/Australia/Senate/term-45.csv', term[:csv]
     end
   end
 
   def test_legislative_period_end_date
     VCR.use_cassette('countries_json') do
       term = Everypolitician.country(slug: 'Australia').legislature(slug: 'Representatives').legislative_periods[1]
-      assert_equal Date.new(2013, 9, 7), term.end_date
+      assert_equal Date.new(2016, 5, 9), term.end_date
     end
   end
 
