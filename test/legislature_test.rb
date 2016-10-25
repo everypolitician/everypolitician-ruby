@@ -72,6 +72,11 @@ class EverypoliticianTest < Minitest::Test
     assert_equal 'Sénat', bicameral.upper_house.name
   end
 
+  def test_upper_house_with_missing_upper_house
+    bicameral = Everypolitician.country(code: 'UK')
+    assert_equal nil, bicameral.upper_house
+  end
+
   def test_upper_house_with_unicameral_house
     unicameral = Everypolitician.country(code: 'GG-ALD')
     assert_equal 'States', unicameral.upper_house.name
