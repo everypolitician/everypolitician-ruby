@@ -12,6 +12,7 @@ module Everypolitician
     attr_reader :raw_data
     attr_reader :statement_count
     attr_reader :popolo_url
+    attr_reader :type
 
     def self.find(country_slug, legislature_slug)
       country = Country.find(country_slug)
@@ -28,6 +29,7 @@ module Everypolitician
       @popolo_url = legislature_data[:popolo_url]
       @raw_data = legislature_data
       @country = country
+      @type = legislature_data[:type]
     end
 
     def [](key)
