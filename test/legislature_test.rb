@@ -83,6 +83,11 @@ class EverypoliticianTest < Minitest::Test
     VCR.use_cassette('countries_json') do
       bicameral = Everypolitician.country(code: 'CM')
       assert_equal 'Sénat', bicameral.upper_house.name
+    end
+  end
+
+  def test_upper_house_with_unicameral_house
+    VCR.use_cassette('countries_json') do
       unicameral = Everypolitician.country(code: 'GG-ALD')
       assert_equal 'States', unicameral.upper_house.name
     end
@@ -92,10 +97,27 @@ class EverypoliticianTest < Minitest::Test
     VCR.use_cassette('countries_json') do
       bicameral = Everypolitician.country(code: 'CM')
       assert_equal 'Assemblée Nationale', bicameral.lower_house.name
+    end
+  end
+
+  def test_lower_house_with_unicameral_house
+    VCR.use_cassette('countries_json') do
       unicameral = Everypolitician.country(code: 'GG-ALD')
       assert_equal 'States', unicameral.lower_house.name
+    end
+  end
+
+  def test_lower_house_with_multiple_matching_houses
+    VCR.use_cassette('countries_json') do
       two_lower_houses = Everypolitician.country(code: 'VG')
       assert_equal 'House of Assembly', two_lower_houses.lower_house.name
+    end
+  end
+
+  def test_upper_house_with_multiple_matching_houses
+    VCR.use_cassette('countries_json') do
+      two_houses = Everypolitician.country(code: 'VG')
+      assert_equal 'House of Assembly', two_houses.upper_house.name
     end
   end
 end
