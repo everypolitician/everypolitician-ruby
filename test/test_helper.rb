@@ -2,6 +2,7 @@ $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'everypolitician'
 
 require 'minitest/autorun'
+require 'minitest/around/unit'
 require 'vcr'
 require 'pry'
 

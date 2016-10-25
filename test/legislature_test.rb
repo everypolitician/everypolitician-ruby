@@ -8,116 +8,92 @@ class EverypoliticianTest < Minitest::Test
     Everypolitician.countries = nil
   end
 
-  def test_legislature_find
+  def around(&block)
     VCR.use_cassette('countries_json') do
-      legislature = Everypolitician::Legislature.find('Australia', 'Senate')
-      assert_equal 'Senate', legislature.name
-      assert %r{#{CDN}/everypolitician/everypolitician-data/\w+?/data/Australia/Senate/ep-popolo-v1.0.json}.match(legislature.popolo_url)
-      assert legislature.legislative_periods.is_a?(Array)
+      block
     end
+  end
+
+  def test_legislature_find
+    legislature = Everypolitician::Legislature.find('Australia', 'Senate')
+    assert_equal 'Senate', legislature.name
+    assert %r{#{CDN}/everypolitician/everypolitician-data/\w+?/data/Australia/Senate/ep-popolo-v1.0.json}.match(legislature.popolo_url)
+    assert legislature.legislative_periods.is_a?(Array)
   end
 
   def test_legislature_find_returns_nil_for_missing_legislatures
-    VCR.use_cassette('countries_json') do
-      assert_nil Everypolitician::Legislature.find('Narnia', 'Aslan')
-    end
+    assert_nil Everypolitician::Legislature.find('Narnia', 'Aslan')
   end
 
   def test_legislature_find_returns_nil_for_known_country_unknown_legislature
-    VCR.use_cassette('countries_json') do
-      assert_nil Everypolitician::Legislature.find('Australia', 'ThisIsNotAHouse')
-    end
+    assert_nil Everypolitician::Legislature.find('Australia', 'ThisIsNotAHouse')
   end
 
   def test_find_legislature_is_case_insensitive
-    VCR.use_cassette('countries_json') do
-      legislature = Everypolitician::Legislature.find('UK', 'commons')
-      assert_equal 'House of Commons', legislature.name
-    end
+    legislature = Everypolitician::Legislature.find('UK', 'commons')
+    assert_equal 'House of Commons', legislature.name
   end
 
   def test_legislature_convenience_method
-    VCR.use_cassette('countries_json') do
-      legislature = Everypolitician.legislature('Australia', 'Senate')
-      assert_equal 'Senate', legislature.name
-      assert %r{#{CDN}/everypolitician/everypolitician-data/\w+?/data/Australia/Senate/ep-popolo-v1.0.json}.match(legislature.popolo_url)
-      assert legislature.legislative_periods.is_a?(Array)
-    end
+    legislature = Everypolitician.legislature('Australia', 'Senate')
+    assert_equal 'Senate', legislature.name
+    assert %r{#{CDN}/everypolitician/everypolitician-data/\w+?/data/Australia/Senate/ep-popolo-v1.0.json}.match(legislature.popolo_url)
+    assert legislature.legislative_periods.is_a?(Array)
   end
 
   def test_sources_dir_convenience_method
-    VCR.use_cassette('countries_json') do
-      legislature = Everypolitician::Legislature.from_sources_dir('Australia/Senate')
-      assert_equal 'Australia', legislature.country.name
-      assert_equal 'AU', legislature.country.code
-      assert_equal 'Senate', legislature.name
-    end
+    legislature = Everypolitician::Legislature.from_sources_dir('Australia/Senate')
+    assert_equal 'Australia', legislature.country.name
+    assert_equal 'AU', legislature.country.code
+    assert_equal 'Senate', legislature.name
   end
 
   def test_finding_legislature_by_attributes
-    VCR.use_cassette('countries_json') do
-      country = Everypolitician.country(code: 'AU')
-      senate = country.legislature(slug: 'Senate')
-      assert_equal 'Senate', senate.name
-    end
+    country = Everypolitician.country(code: 'AU')
+    senate = country.legislature(slug: 'Senate')
+    assert_equal 'Senate', senate.name
   end
 
   def test_accessing_properties_with_square_brackets
-    VCR.use_cassette('countries_json') do
-      legislature = Everypolitician::Legislature.find('UK', 'commons')
-      assert_equal 'House of Commons', legislature[:name]
-    end
+    legislature = Everypolitician::Legislature.find('UK', 'commons')
+    assert_equal 'House of Commons', legislature[:name]
   end
 
   def test_csv_url_method
-    VCR.use_cassette('countries_json') do
-      legislature = Everypolitician::Legislature.find('UK', 'commons')
-      base = 'https://cdn.rawgit.com/everypolitician/everypolitician-data/'
-      sha = legislature.sha
-      path = '/data/UK/Commons/names.csv'
-      assert_equal legislature.names_url, URI.join(base, sha + path).to_s
-    end
+    legislature = Everypolitician::Legislature.find('UK', 'commons')
+    base = 'https://cdn.rawgit.com/everypolitician/everypolitician-data/'
+    sha = legislature.sha
+    path = '/data/UK/Commons/names.csv'
+    assert_equal legislature.names_url, URI.join(base, sha + path).to_s
   end
 
   def test_upper_house_method
-    VCR.use_cassette('countries_json') do
-      bicameral = Everypolitician.country(code: 'CM')
-      assert_equal 'Sénat', bicameral.upper_house.name
-    end
+    bicameral = Everypolitician.country(code: 'CM')
+    assert_equal 'Sénat', bicameral.upper_house.name
   end
 
   def test_upper_house_with_unicameral_house
-    VCR.use_cassette('countries_json') do
-      unicameral = Everypolitician.country(code: 'GG-ALD')
-      assert_equal 'States', unicameral.upper_house.name
-    end
+    unicameral = Everypolitician.country(code: 'GG-ALD')
+    assert_equal 'States', unicameral.upper_house.name
   end
 
   def test_lower_house_method
-    VCR.use_cassette('countries_json') do
-      bicameral = Everypolitician.country(code: 'CM')
-      assert_equal 'Assemblée Nationale', bicameral.lower_house.name
-    end
+    bicameral = Everypolitician.country(code: 'CM')
+    assert_equal 'Assemblée Nationale', bicameral.lower_house.name
   end
 
   def test_lower_house_with_unicameral_house
-    VCR.use_cassette('countries_json') do
-      unicameral = Everypolitician.country(code: 'GG-ALD')
-      assert_equal 'States', unicameral.lower_house.name
-    end
+    unicameral = Everypolitician.country(code: 'GG-ALD')
+    assert_equal 'States', unicameral.lower_house.name
   end
 
   def test_lower_house_with_multiple_matching_houses
-    VCR.use_cassette('countries_json') do
-      two_lower_houses = Everypolitician.country(code: 'VG')
-      assert_equal 'House of Assembly', two_lower_houses.lower_house.name
-    end
+    two_lower_houses = Everypolitician.country(code: 'VG')
+    assert_equal 'House of Assembly', two_lower_houses.lower_house.name
   end
 
   def test_upper_house_with_multiple_matching_houses
-    VCR.use_cassette('countries_json') do
-      two_houses = Everypolitician.country(code: 'VG')
-      assert_equal 'House of Assembly', two_houses.upper_house.name
-    end
+    two_houses = Everypolitician.country(code: 'VG')
+    assert_equal 'House of Assembly', two_houses.upper_house.name
   end
 end
