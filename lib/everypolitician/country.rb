@@ -49,7 +49,7 @@ module Everypolitician
     def get_house(type)
       houses = legislatures.select { |l| l.type == type || l.type == 'unicameral legislature' }
       return houses.first if houses.count == 1
-      houses.sort_by { |h| h.legislative_periods.max_by { |l| l[:start_date] }[:start_date] }.last
+      houses.max_by { |h| h.legislative_periods.map(&:start_date).max }
     end
   end
 end
