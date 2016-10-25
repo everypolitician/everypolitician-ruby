@@ -92,12 +92,12 @@ class EverypoliticianTest < Minitest::Test
     assert_equal 'States', unicameral.lower_house.name
   end
 
-  def test_lower_house_with_multiple_matching_houses
-    two_lower_houses = Everypolitician.country(code: 'VG')
-    assert_equal 'House of Assembly', two_lower_houses.lower_house.name
+  def test_lower_house_returns_most_recent_house
+    two_houses = Everypolitician.country(code: 'VG')
+    assert_equal 'House of Assembly', two_houses.lower_house.name
   end
 
-  def test_upper_house_with_multiple_matching_houses
+  def test_upper_house_returns_most_recent_house
     two_houses = Everypolitician.country(code: 'VG')
     assert_equal 'House of Assembly', two_houses.upper_house.name
   end
