@@ -76,6 +76,7 @@ class EverypoliticianTest < Minitest::Test
       af = Everypolitician.country(slug: 'Albania').legislature(slug: 'Assembly')
       term = af.latest_term
       assert_instance_of EverPolitician::Popolo::LegislativePeriod, term
+      assert_equal term.id, 'term/8'
       assert_equal term.memberships.count, 139
     end
   end
