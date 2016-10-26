@@ -58,9 +58,9 @@ end
 # Note that this may involve a **substantial download**
 assembly = Everypolitician.country(slug: 'Albania').legislature(slug: 'Assembly')
 term_details = assembly.latest_term
-puts "Members of the Assembly:"
+puts 'Members of the Assembly:'
 term_details.memberships.each do |m|
-  puts "#{m.person.name}"
+  puts m.person.name
 end
 ```
 
