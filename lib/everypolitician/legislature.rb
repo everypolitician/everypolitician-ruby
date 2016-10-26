@@ -51,7 +51,7 @@ module Everypolitician
     end
 
     def latest_term
-      @latest_term ||= popolo.terms.find_by(id: legislative_periods.max(&:start_date).id)
+        @latest_term ||= popolo.terms.find_by(id: legislative_periods.max_by { |l| l.start_date }.id)
     end
 
     def self.from_sources_dir(dir)
