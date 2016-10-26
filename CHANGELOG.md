@@ -7,6 +7,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Added `all_legislatures` to Index class. Returns an array of all the
   Legislatures for all countries.
+- Added `latest_term` to Legislature class. This returns an
+  Everpolitician::Popolo::LegislativePeriod object with data from the
+  latest term. Note that this may involve a **substantial download**
+  depending on the legislature.
 
 ## [0.19.0] - 2016-10-19
 
