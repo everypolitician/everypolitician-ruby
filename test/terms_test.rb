@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class EverypoliticianTest < Minitest::Test
+class EverypoliticianTermsTest < Minitest::Test
   # Clear the countries.json cache before each run
   def setup
     Everypolitician.countries = nil
