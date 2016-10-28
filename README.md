@@ -53,6 +53,14 @@ end
 Everypolitician::Index.new.all_legislatures.each do |legislature|
   puts "#{legislature.name} in #{legislature.country.name} has #{legislature.person_count} member(s)"
 end
+
+# Fetch Everypolitician::Popolo::LegislativePeriod for the latest term
+# Note that this may involve a **substantial download**
+puts 'Members of the Assembly:'
+assembly = Everypolitician::Index.new.country('Albania').lower_house
+assembly.latest_term.memberships.map(&:person).uniq(&:id).each do |person|
+  puts person.name
+end
 ```
 
 By default, the gem connects to EveryPolitician's data on GitHub over HTTPS and

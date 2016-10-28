@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class EverypoliticianTest < Minitest::Test
+class EverypoliticianTermsTest < Minitest::Test
   # Clear the countries.json cache before each run
   def setup
     Everypolitician.countries = nil
@@ -68,6 +68,16 @@ class EverypoliticianTest < Minitest::Test
       term = af.legislative_periods.last
       assert_equal Date.new(2009), term.start_date
       assert_equal Date.new(2013), term.end_date
+    end
+  end
+
+  def test_latest_term
+    VCR.use_cassette('albania_term', record: :once) do
+      af = Everypolitician.country(slug: 'Albania').legislature(slug: 'Assembly')
+      term = af.latest_term
+      assert_instance_of EveryPolitician::Popolo::LegislativePeriod, term
+      assert_equal term.id, 'term/8'
+      assert_equal term.memberships.count, 139
     end
   end
 end

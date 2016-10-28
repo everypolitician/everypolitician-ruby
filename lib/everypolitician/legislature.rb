@@ -50,6 +50,10 @@ module Everypolitician
       @directory = raw_data[:sources_directory].split('/')[1, 2].join('/')
     end
 
+    def latest_term
+      @latest_term ||= popolo.latest_term
+    end
+
     def self.from_sources_dir(dir)
       @index_by_sources ||= EveryPolitician.countries.map(&:legislatures).flatten.group_by(&:directory)
       @index_by_sources[dir][0]

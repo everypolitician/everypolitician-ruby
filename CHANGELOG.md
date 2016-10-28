@@ -3,10 +3,16 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.20.0] - 2016-10-28
+
 ### Added
 
 - Added `all_legislatures` to Index class. Returns an array of all the
   Legislatures for all countries.
+- Added `latest_term` to Legislature class. This returns an
+  Everpolitician::Popolo::LegislativePeriod object with data from the
+  latest term. Note that this may involve a **substantial download**
+  depending on the legislature.
 
 ## [0.19.0] - 2016-10-19
 
@@ -171,3 +177,5 @@ a string with the time in seconds.
 [0.16.0]: https://https://github.com/everypolitician/everypolitician-ruby/compare/v0.15.0...v0.16.0
 [0.17.0]: https://https://github.com/everypolitician/everypolitician-ruby/compare/v0.16.0...v0.17.0
 [0.18.0]: https://https://github.com/everypolitician/everypolitician-ruby/compare/v0.17.0...v0.18.0
+[0.19.0]: https://https://github.com/everypolitician/everypolitician-ruby/compare/v0.18.0...v0.19.0
+[0.20.0]: https://https://github.com/everypolitician/everypolitician-ruby/compare/v0.19.0...v0.20.0
