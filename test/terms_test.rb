@@ -75,7 +75,7 @@ class EverypoliticianTest < Minitest::Test
     VCR.use_cassette('albania_term', record: :once) do
       af = Everypolitician.country(slug: 'Albania').legislature(slug: 'Assembly')
       term = af.latest_term
-      assert_instance_of EverPolitician::Popolo::LegislativePeriod, term
+      assert_instance_of EveryPolitician::Popolo::LegislativePeriod, term
       assert_equal term.id, 'term/8'
       assert_equal term.memberships.count, 139
     end
