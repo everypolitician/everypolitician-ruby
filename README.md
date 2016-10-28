@@ -59,8 +59,8 @@ end
 assembly = Everypolitician.country(slug: 'Albania').legislature(slug: 'Assembly')
 term_details = assembly.latest_term
 puts 'Members of the Assembly:'
-term_details.memberships.each do |m|
-  puts m.person.name
+term_details.memberships.map(&:person).uniq(&:id).each do |person|
+  puts person.name
 end
 ```
 
