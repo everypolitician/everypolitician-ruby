@@ -1,7 +1,5 @@
 require 'test_helper'
 
-CDN = 'https://cdn.rawgit.com'.freeze
-
 class EverypoliticianTest < Minitest::Test
   # Clear the countries.json cache before each run
   def setup
