@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Everypolitician
   class Country
     attr_reader :name

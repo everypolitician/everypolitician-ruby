@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'everypolitician'
 
@@ -6,7 +8,7 @@ require 'minitest/around/unit'
 require 'vcr'
 require 'pry'
 
-CDN = 'https://cdn.rawgit.com'.freeze
+CDN = 'https://cdn.rawgit.com'
 
 VCR.configure do |config|
   config.cassette_library_dir = 'test/fixtures/vcr_cassettes'

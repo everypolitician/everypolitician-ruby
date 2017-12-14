@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'everypolitician/version'
 require 'json'
 require 'open-uri'

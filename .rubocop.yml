@@ -2,7 +2,13 @@ inherit_from:
   - https://raw.githubusercontent.com/everypolitician/everypolitician-data/master/.rubocop_base.yml
   - .rubocop_todo.yml
 
+AllCops:
+  TargetRubyVersion: 2.3.3
+
 # We're OK with a class of EveryPolitician
 Style/ConstantName:
   Exclude:
     - 'lib/everypolitician.rb'
+
+Style/SafeNavigation:
+  Enabled: false
