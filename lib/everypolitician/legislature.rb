@@ -18,7 +18,8 @@ module Everypolitician
 
     def self.find(country_slug, legislature_slug)
       country = Country.find(country_slug)
-      country&.legislature(legislature_slug)
+      # Can't used &. as we need to cope with earlier ruby versions
+      country && country.legislature(legislature_slug)
     end
 
     def initialize(legislature_data, country)
