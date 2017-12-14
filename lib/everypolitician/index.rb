@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'json'
 require 'open-uri'
 
 module Everypolitician
   class Index
     DEFAULT_INDEX_URL = 'https://raw.githubusercontent.com/' \
-      'everypolitician/everypolitician-data/master/countries.json'.freeze
+      'everypolitician/everypolitician-data/master/countries.json'
 
     attr_reader :index_url
 

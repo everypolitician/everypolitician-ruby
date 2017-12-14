@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'open-uri'
 require 'everypolitician/popolo'
 
@@ -16,7 +18,7 @@ module Everypolitician
 
     def self.find(country_slug, legislature_slug)
       country = Country.find(country_slug)
-      country && country.legislature(legislature_slug)
+      country&.legislature(legislature_slug)
     end
 
     def initialize(legislature_data, country)
