@@ -8,10 +8,8 @@ class EverypoliticianLegislatureTest < Minitest::Test
     Everypolitician.countries = nil
   end
 
-  def around(&block)
-    VCR.use_cassette('countries_json') do
-      block
-    end
+  def around
+    VCR.use_cassette('countries_json') { yield }
   end
 
   def test_legislature_find
@@ -73,7 +71,7 @@ class EverypoliticianLegislatureTest < Minitest::Test
   end
 
   def test_upper_house_with_missing_upper_house
-    bicameral = Everypolitician.country(code: 'UK')
+    bicameral = Everypolitician.country(code: 'GB')
     assert_equal nil, bicameral.upper_house
   end
 
