@@ -9,9 +9,7 @@ class EverypoliticianLegislatureTest < Minitest::Test
   end
 
   def around
-    VCR.use_cassette('countries_json') do
-      yield
-    end
+    VCR.use_cassette('countries_json') { yield }
   end
 
   def test_legislature_find
