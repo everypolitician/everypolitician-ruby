@@ -8,9 +8,9 @@ class EverypoliticianLegislatureTest < Minitest::Test
     Everypolitician.countries = nil
   end
 
-  def around(&block)
+  def around
     VCR.use_cassette('countries_json') do
-      block.call
+      yield
     end
   end
 
