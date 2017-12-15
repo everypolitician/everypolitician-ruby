@@ -73,7 +73,7 @@ class EverypoliticianLegislatureTest < Minitest::Test
   end
 
   def test_upper_house_with_missing_upper_house
-    bicameral = Everypolitician.country(code: 'UK')
+    bicameral = Everypolitician.country(code: 'GB')
     assert_equal nil, bicameral.upper_house
   end
 
