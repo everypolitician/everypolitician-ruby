@@ -10,7 +10,7 @@ class EverypoliticianLegislatureTest < Minitest::Test
 
   def around(&block)
     VCR.use_cassette('countries_json') do
-      block
+      block.call
     end
   end
 
