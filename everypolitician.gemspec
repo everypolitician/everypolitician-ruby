@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'everypolitician-popolo', '>= 0.8.0'
+  spec.add_dependency 'everypolitician-popolo', '>= 0.9.0'
   spec.add_dependency 'require_all'
 
   spec.add_development_dependency 'bundler', '~> 1.10'
@@ -30,5 +30,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rubocop', '~> 0.52.0'
   spec.add_development_dependency 'vcr', '~> 3.0.3'
-  spec.add_development_dependency 'webmock', '~> 2.0.3'
+  spec.add_development_dependency 'webmock', '~> 3.4.2'
 end
