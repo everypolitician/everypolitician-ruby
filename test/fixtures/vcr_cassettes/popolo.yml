@@ -30394,7 +30394,7 @@ http_interactions:
   recorded_at: Tue, 26 Jul 2016 15:06:10 GMT
 - request:
     method: get
-    uri: https://cdn.rawgit.com/everypolitician/everypolitician-data/ea04acd/data/Australia/Senate/ep-popolo-v1.0.json
+    uri: https://cdn.jsdelivr.net/gh/everypolitician/everypolitician-data@ea04acd/data/Australia/Senate/ep-popolo-v1.0.json
     body:
       encoding: US-ASCII
       string: ''
