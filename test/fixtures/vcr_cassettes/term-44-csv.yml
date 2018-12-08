@@ -9578,7 +9578,7 @@ http_interactions:
   recorded_at: Tue, 23 Aug 2016 15:37:34 GMT
 - request:
     method: get
-    uri: https://cdn.rawgit.com/everypolitician/everypolitician-data/9fb1d17/data/Australia/Senate/term-44.csv
+    uri: https://cdn.jsdelivr.net/gh/everypolitician/everypolitician-data@9fb1d17/data/Australia/Senate/term-44.csv
     body:
       encoding: US-ASCII
       string: ''

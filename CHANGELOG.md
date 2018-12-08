@@ -36,7 +36,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- Added `csv_url` to Legislature class. Returns full url of `names.csv` file. For example: `https://cdn.rawgit.com/everypolitician/everypolitician-data/ba976cf/data/UK/Commons/names.csv`
+- Added `csv_url` to Legislature class. Returns full url of `names.csv` file. For example: `https://cdn.jsdelivr.net/gh/everypolitician/everypolitician-data@ba976cf/data/UK/Commons/names.csv`
 
 ## [0.15.0] - 2016-08-23
 
